@@ -4,6 +4,10 @@ import router from './router'
 import App from './App'
 import { setupAntd } from './plugins/antd'
 
+import './public/css/base.css'
+import './public/css/init.less'
+import '@/public/font/iconfont.css';
+
 const app = createApp(App)
 
 setupAntd(app)

@@ -6,7 +6,14 @@ const Routes: Array<RouteRecordRaw> = [
   {
     path: '/home',
     name: 'home',
-    component: () => import(/* webpackChunkName: "home" */ '@/views/home')
+    component: () => import(/* webpackChunkName: "home" */ '@/views/home'),
+    meta: { title: '首页', hidden: true }
+  },
+  {
+    path: '/database',
+    name: 'database',
+    component: () => import(/* webpackChunkName: "database" */ '@/views/database'),
+    meta: { title: '数据库配置', hidden: false, icon: 'icon-zichan' }
   }
 ]
 

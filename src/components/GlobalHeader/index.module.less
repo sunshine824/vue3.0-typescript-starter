@@ -37,3 +37,124 @@
     }
   }
 }
+
+.menu-class {
+  :global {
+    .menu-icon {
+      margin-right: 15px;
+    }
+  }
+  .ant-menu-inline-collapsed {
+    width: 60px;
+    & > .ant-menu-submenu {
+      & > .ant-menu-submenu-title {
+        padding: 0 24px !important;
+        .menu-icon {
+          & + span {
+            opacity: 0;
+          }
+        }
+      }
+    }
+    & > .ant-menu-item {
+      padding: 0 24px !important;
+      .menu-icon {
+        & + span {
+          opacity: 0;
+        }
+      }
+    }
+  }
+  &.horizontal-menu-class {
+    :global {
+      .ant-menu {
+        background: #1d1e1f;
+        max-width: 700px;
+        margin-right: 20px;
+        .ant-menu-item {
+          color: #b0b0b1;
+          font-size: 15px;
+          border-bottom: none;
+          top: 0;
+          &-active {
+            color: rgba(255, 255, 255, 0.9);
+          }
+          &-selected {
+            background: #4a4b4c;
+            position: relative;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.9);
+            border-bottom: none;
+            &::after {
+              content: '';
+              position: absolute;
+              bottom: 0;
+              height: 3px;
+              width: 100%;
+              background: #0972fe;
+              left: 0;
+            }
+          }
+        }
+      }
+      .ant-menu-submenu {
+        top: 0;
+        border-bottom: none;
+        &-title {
+          color: #b0b0b1;
+          font-size: 15px;
+          &:hover {
+            color: #fff;
+          }
+        }
+        &-active {
+          color: rgba(255, 255, 255, 0.9);
+          border-bottom: none !important;
+        }
+        &-selected {
+          background: #4a4b4c;
+          position: relative;
+          font-weight: 700;
+          color: rgba(255, 255, 255, 0.9);
+          border-bottom: none !important;
+          .ant-menu-submenu-title {
+            color: #fff;
+          }
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            height: 3px;
+            width: 100%;
+            background: #0972fe;
+            left: 0;
+          }
+        }
+      }
+    }
+  }
+  &.inline-menu-class {
+    .ant-menu-dark,
+    .ant-menu-dark .ant-menu-sub {
+      background: #1d1e1f;
+    }
+    .ant-menu-dark .ant-menu-inline.ant-menu-sub {
+      background: #000c17;
+    }
+    .ant-menu-item {
+      font-size: 15px;
+      border-bottom: none;
+      top: 0;
+      &-active {
+        background: rgba(57, 57, 57, 0.5);
+        color: rgba(255, 255, 255, 0.9);
+      }
+      &-selected {
+        background: #1f7eff;
+        position: relative;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.9);
+      }
+    }
+  }
+}
