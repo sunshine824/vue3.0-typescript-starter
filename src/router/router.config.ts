@@ -32,6 +32,7 @@ const Routes: Array<RouteRecordRaw> = [
         name: 'fault',
         component: () => import(/* webpackChunkName: "fault" */ '@/views/eoms/fault'),
         meta: { title: '故障处理方案', hidden: false },
+
       },
       {
         path: "/eoms/alarm",

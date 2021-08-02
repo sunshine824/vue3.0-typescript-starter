@@ -6,4 +6,8 @@ const router = createRouter({
   routes: [mainRoutes].concat(baseRoutes)
 })
 
+router.beforeEach((to, from, next) => {
+  next()
+})
+
 export default router 
