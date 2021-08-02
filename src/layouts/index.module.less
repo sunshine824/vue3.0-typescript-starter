@@ -6,6 +6,52 @@
       height: 100%;
     }
   }
+  .user-info {
+    min-width: 100px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-end;
+    .lang-box {
+      width: 80px;
+      margin-right: 10px;
+      &.ant-select {
+        font-size: 12px;
+      }
+      .ant-select-selection {
+        background: transparent;
+        border: 1px solid #a7a5a5;
+        color: #fff;
+      }
+      .ant-select-arrow {
+        color: #fff;
+        font-size: 10px;
+      }
+    }
+    .ant-dropdown-trigger {
+      height: 54px;
+      line-height: 54px;
+    }
+    .user-head {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+      margin-top: -4px;
+    }
+    .user-name {
+      line-height: 54px;
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .icon {
+      line-height: 54px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+  }
 }
 
 .page-view {

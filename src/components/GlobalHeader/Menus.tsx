@@ -71,6 +71,11 @@ const Menus = defineComponent({
                   if (!menu.children || !menu.children.length) {
                     return (
                       <Menu.Item key={menu.path}>
+                        {menus.meta?.icon && (
+                          <span
+                            class={`iconfont ${menu.meta.icon} menu-icon`}
+                          ></span>
+                        )}
                         <span>{menu.meta?.title}</span>
                       </Menu.Item>
                     )
