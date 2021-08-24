@@ -30,10 +30,6 @@ const Menus = defineComponent({
       return getMenus().filter((item) => !item?.meta?.hidden)
     })
 
-    onMounted(() => {
-      console.log(getMenus())
-    })
-
     // 获取路由列表
     const getMenus = () => {
       let menuList: RouteRecordRaw[] = []
