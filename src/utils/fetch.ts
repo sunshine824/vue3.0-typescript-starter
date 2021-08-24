@@ -3,9 +3,12 @@ import { getToken, removeToken } from './token';
 import { Modal } from 'ant-design-vue';
 import { Message, Notification } from './resetMessage';
 
+// .env环境变量
+const BaseUrl = import.meta.env.VITE_API_BASE_URL as string
+
 // create an axios instance
 const service: AxiosInstance = axios.create({
-  baseURL: '/dbd-authority', // 正式环境
+  baseURL: BaseUrl, // 正式环境
   timeout: 60 * 1000,
   headers: {}
 });

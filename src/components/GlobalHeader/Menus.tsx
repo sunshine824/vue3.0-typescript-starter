@@ -1,4 +1,4 @@
-import { defineComponent, ref, watch, computed } from 'vue'
+import { defineComponent, onMounted, ref, watch, computed } from 'vue'
 import { useRoute, useRouter, RouteRecordRaw } from 'vue-router'
 import { Menu } from 'ant-design-vue'
 
@@ -28,6 +28,10 @@ const Menus = defineComponent({
     // 获取显示状态的路由
     const menuLists = computed(() => {
       return getMenus().filter((item) => !item?.meta?.hidden)
+    })
+
+    onMounted(() => {
+      console.log(getMenus())
     })
 
     // 获取路由列表

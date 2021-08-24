@@ -1,4 +1,5 @@
 import { defineComponent, reactive, ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { Form, Input, Button, Row, Col } from 'ant-design-vue'
 import { uuid } from '@/utils/util'
 import GlobalBg from '@/components/GlobalBg'
@@ -9,6 +10,7 @@ import styles from './index.module.less'
 const Login = defineComponent({
   name: 'Login',
   setup(props) {
+    const router = useRouter()
     const labelCol = { span: 4 }
     const wrapperCol = { span: 18, offset: 3 }
     const formRef = ref()
@@ -45,7 +47,9 @@ const Login = defineComponent({
         loading.value = true
         try {
           const { data } = await login(formData)
+          sessionStorage.setItem('token', data.token)
           sessionStorage.setItem('userInfo', JSON.stringify(data.userInfo))
+          router.push('/database')
           loading.value = false
         } catch (error) {
           loading.value = false
@@ -68,7 +72,6 @@ const Login = defineComponent({
               <img class={styles['img']} />
               <Form
                 ref={formRef}
-                class="my-form"
                 rules={rules}
                 model={formData}
                 label-col={labelCol}

@@ -3,14 +3,14 @@ import { RouteLayout } from '@/layouts'
 
 import styles from './index.module.less'
 
-const DataBase = defineComponent({
-  name: 'DataBase',
+const Database = defineComponent({
+  name: 'Database',
   setup() {
     const slots = {
-      default: () => <div>这是内容区</div>,
+      default: () => <div>数据库配置</div>,
     }
     return () => <RouteLayout v-slots={slots} isSubView={false}></RouteLayout>
   },
 })
 
-export default DataBase
+export default Database
