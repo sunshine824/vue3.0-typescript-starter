@@ -1,27 +1,49 @@
-# Vue 3 + Typescript + Vite
+### 简介
 
-This template should help get you started developing with Vue 3 and Typescript in Vite.
+此项目是基于 Vue3.0 全家桶 + TypeScript + Antd2.0 + Vite 搭建简易脚手架，用到大多数常用的 API，适合 Vue3 入门新手借鉴。
+由于每个项目呈现内容不同，所以在这里我就只搭建了一个骨架，具体内容自定义。
 
-## Recommended IDE Setup
+Vue2.0 版本：<a href="https://github.com/sunshine824/vue-typescript-starter.git">https://github.com/sunshine824/vue-typescript-starter.git</a>
 
-[VSCode](https://code.visualstudio.com/) + [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur). Make sure to enable `vetur.experimental.templateInterpolationService` in settings!
+### 相关包版本号
 
-### If Using `<script setup>`
+所有技术都是当前最新的。
 
-[`<script setup>`](https://github.com/vuejs/rfcs/pull/227) is a feature that is currently in RFC stage. To get proper IDE support for the syntax, use [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) instead of Vetur (and disable Vetur).
+- vue： "^3.0.5",
+- typescript : "^4.3.2",
+- ant-design-vue： "2.2.2",
+- vue-router : "^4.0.9",
+- less："^4.1.1",
+- vuex: "^4.0.1"
+- axios："^0.21.1",
 
-## Type Support For `.vue` Imports in TS
+### Build Setup
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can use the following:
+```
+# clone
+git clone https://github.com/sunshine824/vue3.0-typescript-starter.git
+```
 
-### If Using Volar
+```
+# cd
+cd  vue3.0-typescript-starter
+```
 
-Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
+```
+# install dependencies
+npm install
+```
 
-### If Using Vetur
+```
+# Compiles and hot-reloads for development
+npm run dev
+```
 
-1. Install and add `@vuedx/typescript-plugin-vue` to the [plugins section](https://www.typescriptlang.org/tsconfig#plugins) in `tsconfig.json`
-2. Delete `src/shims-vue.d.ts` as it is no longer needed to provide module info to Typescript
-3. Open `src/main.ts` in VSCode
-4. Open the VSCode command palette
-5. Search and run "Select TypeScript version" -> "Use workspace version"
+```
+# Compiles and minifies for production
+npm run build
+```
+
+### 最后
+
+如果你觉得该项目不错，或者对你有所帮助，点个 Star 、或者真心赞赏一下 都是对我最大的鼓励，我会更有动力维护好该项目
