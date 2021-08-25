@@ -29,9 +29,12 @@ const LevelBasicLayout = defineComponent({
     return () => (
       <Layout class={styles['level-layout']}>
         <GlobalHeader v-slots={slots}></GlobalHeader>
-        <Layout.Content>
-          <RouterView />
-        </Layout.Content>
+        <div class={styles['level-content']}>
+          <div class={styles['level-sub-menu']}></div>
+          <Layout.Content>
+            <RouterView />
+          </Layout.Content>
+        </div>
       </Layout>
     )
   },

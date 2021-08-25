@@ -1,6 +1,6 @@
 import { defineComponent, reactive, ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { Form, Input, Button, Row, Col } from 'ant-design-vue'
+import { Form, Input, Button, Row, Col, message } from 'ant-design-vue'
 import { uuid } from '@/utils/util'
 import GlobalBg from '@/components/GlobalBg'
 import { login } from '@/api/user.ts'
@@ -56,6 +56,7 @@ const Login = defineComponent({
           getCaptcha()
         }
       } catch (error) {
+        message.warning('账号:admin  密码:666666')
         console.log(error)
       }
     }
@@ -92,7 +93,7 @@ const Login = defineComponent({
                     placeholder="请输入密码"
                   ></Input>
                 </Form.Item>
-                <Form.Item name="captcha">
+                {/* <Form.Item name="captcha">
                   <Row gutter={20} class={styles['captcha-row']}>
                     <Col span={16}>
                       <Input
@@ -109,7 +110,7 @@ const Login = defineComponent({
                       />
                     </Col>
                   </Row>
-                </Form.Item>
+                </Form.Item> */}
                 <Form.Item wrapperCol={{ span: 18, offset: 3 }}>
                   <Button
                     size="large"

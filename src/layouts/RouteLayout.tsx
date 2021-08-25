@@ -1,5 +1,6 @@
 import { defineComponent, watch, ref } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
+import ABreadCrumb from '@/components/ABreadCrumb'
 
 import styles from './index.module.less'
 
@@ -22,7 +23,7 @@ const RouteLayout = defineComponent({
     return () => (
       <div class={styles['page-view']}>
         <div class={styles['top-info']}>
-          <h3 class={styles['title']}>{routeName.value}</h3>
+          <ABreadCrumb></ABreadCrumb>
         </div>
         <div class={styles['view-con']}>
           {props.isSubView ? <RouterView /> : slots.default?.()}
