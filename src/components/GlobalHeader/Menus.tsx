@@ -11,6 +11,10 @@ const Menus = defineComponent({
       type: String,
       default: 'horizontal',
     },
+    menuLists: {
+      type: Array,
+      default: [],
+    },
   },
   setup(props, { slots }) {
     const route = useRoute()
@@ -24,23 +28,6 @@ const Menus = defineComponent({
       }
       return []
     })
-
-    // 获取显示状态的路由
-    const menuLists = computed(() => {
-      return getMenus().filter((item) => !item?.meta?.hidden)
-    })
-
-    // 获取路由列表
-    const getMenus = () => {
-      let menuList: RouteRecordRaw[] = []
-      const routes: Array<RouteRecordRaw> = useRouter().options?.routes || []
-      routes.forEach((item) => {
-        if (item.path == '/') {
-          menuList = item.children || []
-        }
-      })
-      return menuList
-    }
 
     //  路由跳转
     const handleMenuClick = (item: { key: string }) => {
@@ -102,7 +89,7 @@ const Menus = defineComponent({
           style={{ lineHeight: '54px' }}
           onClick={handleMenuClick}
         >
-          {menuLists['value'].map((menu) => {
+          {(props.menuLists as RouteRecordRaw[]).map((menu) => {
             if (!menu.children || !menu.children.length) {
               return (
                 <Menu.Item key={menu.path}>

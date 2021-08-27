@@ -39,11 +39,13 @@ function fnAddDynamicMenuRoutes(
         },
       })
     } else if (item.list && item.list.length) {
+      const menus = fnAddDynamicMenuRoutes(item.list, [])
       routes.push({
         path: `/${item.url}`,
         name: item.url,
         component: RouteLayout,
-        children: fnAddDynamicMenuRoutes(item.list, []),
+        redirect: menus[0].path,
+        children: menus,
         meta: {
           title: item.name,
           hidden: false,
