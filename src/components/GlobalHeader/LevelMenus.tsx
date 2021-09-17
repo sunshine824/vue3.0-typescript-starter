@@ -1,4 +1,4 @@
-import { defineComponent, ref, watch } from 'vue'
+import { defineComponent, onMounted, ref, watch } from 'vue'
 import { RouteRecordRaw, useRoute, useRouter } from 'vue-router'
 import router from '../../router'
 
@@ -17,7 +17,14 @@ const LevelMenus = defineComponent({
 
     const router = useRouter()
 
-    const baseUrl = ref(route.path.split('/')) // 当前跳转基础路由
+    const baseUrl = ref() // 当前跳转基础路由
+
+    onMounted(() => {
+      const paths = route.path.split('/')
+      if (paths.length > 1) {
+        baseUrl.value = '/' + paths[1]
+      }
+    })
 
     // 路由跳转
     const skipTo = (item: RouteRecordRaw) => {
@@ -26,7 +33,10 @@ const LevelMenus = defineComponent({
 
     // 监听路由变化
     watch(route, (val) => {
-      baseUrl.value = val.path.split('/')
+      const paths = val.path.split('/')
+      if (paths.length > 1) {
+        baseUrl.value = '/' + paths[1]
+      }
     })
 
     return () => (
@@ -36,7 +46,7 @@ const LevelMenus = defineComponent({
             return (
               <li
                 onClick={skipTo.bind(this, menu)}
-                class={menu.name == baseUrl.value[1] && styles['active']}
+                class={menu.path == baseUrl.value && styles['active']}
               >
                 <span class={`iconfont ${menu?.meta?.icon} menu-icon`}></span>
                 <span class={styles['title']}>{menu?.meta?.title}</span>

@@ -1,4 +1,4 @@
-import { defineComponent, ref, watch, computed } from 'vue'
+import { defineComponent, ref, watch, computed, onMounted } from 'vue'
 import { useRoute, useRouter, RouteRecordRaw } from 'vue-router'
 import { Menu } from 'ant-design-vue'
 
@@ -19,7 +19,12 @@ const Menus = defineComponent({
   setup(props, { slots }) {
     const route = useRoute()
     const router = useRouter()
-    const activeRoute = ref(route.path) // 当前路由
+    const activeRoute = ref() // 当前路由
+
+    onMounted(() => {
+      const paths = route.path.split('/')
+      activeRoute.value = paths[paths.length - 1]
+    })
 
     // 默认展开项
     const openKeys = computed(() => {
@@ -36,13 +41,14 @@ const Menus = defineComponent({
 
     // 监听路由变化
     watch(route, (val) => {
-      activeRoute.value = val.path
+      const paths = val.path.split('/')
+      activeRoute.value = paths[paths.length - 1]
     })
 
     // 子级导航渲染
     const SubItem = (menus: any) => {
       return (
-        <Menu.SubMenu key={menus.path}>
+        <Menu.SubMenu key={menus.name}>
           {{
             title: () => (
               <>
@@ -57,7 +63,7 @@ const Menus = defineComponent({
                 {menus.children.map((menu: any) => {
                   if (!menu.children || !menu.children.length) {
                     return (
-                      <Menu.Item key={menu.path}>
+                      <Menu.Item key={menu.name}>
                         {menus.meta?.icon && (
                           <span
                             class={`iconfont ${menu.meta.icon} menu-icon`}
@@ -92,7 +98,7 @@ const Menus = defineComponent({
           {(props.menuLists as RouteRecordRaw[]).map((menu) => {
             if (!menu.children || !menu.children.length) {
               return (
-                <Menu.Item key={menu.path}>
+                <Menu.Item key={menu.name}>
                   {menu.meta?.icon && (
                     <span class={`iconfont ${menu.meta.icon} menu-icon`}></span>
                   )}

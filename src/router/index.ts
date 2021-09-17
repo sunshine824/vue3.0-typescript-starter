@@ -1,6 +1,7 @@
 import {
   createRouter,
   createWebHashHistory,
+  createWebHistory,
   RouteRecordRaw,
   RouteLocationNormalized,
   NavigationGuardNext,
@@ -15,7 +16,7 @@ let isAddDynamicMenuRoutes = false // 是否请求路由表
 
 // 路由实例
 const router: Router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes: baseRoutes,
 })
 
@@ -27,11 +28,9 @@ function fnAddDynamicMenuRoutes(
   menuList.forEach((item) => {
     if (!item.list) {
       routes.push({
-        path: `/${item.url}`,
-        name: item.url,
-        //component: (resolve: any) => require([`@/views/${item.url}/index`], resolve),
-        component: () =>
-          import(/* webpackChunkName: "login" */ `../views/${item.url}/index`),
+        path: `${item.url}`,
+        name: item.url.slice(0, 1) == '/' ? item.url.slice(1) : item.url, // 截取开头"/"
+        component: () => import('../views' + item.moduleUrl + '/index'),
         meta: {
           title: item.name,
           hidden: false,
@@ -41,10 +40,10 @@ function fnAddDynamicMenuRoutes(
     } else if (item.list && item.list.length) {
       const menus = fnAddDynamicMenuRoutes(item.list, [])
       routes.push({
-        path: `/${item.url}`,
-        name: item.url,
+        path: `${item.url}`,
+        name: item.url.slice(0, 1) == '/' ? item.url.slice(1) : item.url, // 截取开头"/"
         component: RouteLayout,
-        redirect: menus[0].path,
+        redirect: item.url + '/' + menus[0].path,
         children: menus,
         meta: {
           title: item.name,
@@ -78,11 +77,17 @@ router.beforeEach(
               menu.menuList || [],
               [],
             )
+            // 添加兜底路由
+            menuRoutes.push({
+              path: '/:pathMatch(.*)*',
+              redirect: { name: '404' },
+            })
             mainRoutes.children?.unshift(...menuRoutes)
             // 动态添加路由
             router.addRoute(mainRoutes)
             // 注：这步很关键，不然导航获取不到路由
             router.options.routes.unshift(mainRoutes)
+            console.log(router.options)
             // 本地存储按钮权限集合
             sessionStorage.setItem(
               'permissions',
@@ -121,5 +126,9 @@ router.beforeEach(
     }
   },
 )
+
+router.onError((handler) => {
+  console.log(handler)
+})
 
 export default router
