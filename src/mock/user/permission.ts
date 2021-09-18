@@ -5,36 +5,56 @@ const BaseUrl = import.meta.env.VITE_API_BASE_URL as string
 
 const Roles = [
   {
-    moduleUrl: '/database', // 模块地址
-    url: '/database', // 路由地址
-    name: '数据库配置',
-    icon: 'icon-zichan',
+    url: '/dataProtal', // 模块路径&访问路由
+    name: '/dataProtal',
+    title: '数据门户',
+    icon: 'icon-index-copy',
   },
   {
-    moduleUrl: '/eoms',
-    url: '/eoms',
-    name: '运维配置',
-    icon: 'icon-yunwei1',
+    url: '/dataManage',
+    name: '/dataManage',
+    title: '数据管理',
+    icon: 'icon-shuju',
+  },
+  {
+    url: '/designCenter',
+    name: '/designCenter',
+    title: '设计中心',
+    icon: 'icon-shejishi2',
     list: [
       {
-        name: '故障处理方案',
-        moduleUrl: '/eoms/fault',
-        url: 'fault',
-        icon: '',
+        url: '/designCenter/screenManage',
+        name: 'screenManage',
+        title: '画面管理',
+        icon: 'icon-shituzhushitu',
       },
       {
-        moduleUrl: '/eoms/alarm',
-        url: 'alarm',
-        name: '告警模板管理',
-        icon: '',
+        url: '/designCenter/materialMange',
+        name: 'materialMange',
+        title: '素材中心',
+        icon: 'icon-sucai',
+        list: [
+          {
+            url: '/designCenter/materialMange/customControl',
+            name: 'customControl',
+            title: '自定义控件',
+            icon: 'icon-zidingyi',
+          },
+          {
+            url: '/designCenter/materialMange/customMaterial',
+            name: 'customMaterial',
+            title: '自定义素材',
+            icon: 'icon-jichukongjiantubiao-gonggongxuanzekuang',
+          },
+        ],
       },
     ],
   },
   {
-    moduleUrl: '/smart',
-    url: '/smart',
-    name: '物联管理',
-    icon: 'icon-wulianwang',
+    url: '/userManage',
+    name: '/userManage',
+    title: '用户管理',
+    icon: 'icon-yonghuguanli',
   },
 ]
 

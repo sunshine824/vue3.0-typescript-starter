@@ -8,7 +8,7 @@
   }
   :global {
     .ant-layout-header {
-      background-color: #19192e;
+      background-color: #191c3e;
       display: flex;
       flex-flow: row nowrap;
       justify-content: space-between;
@@ -41,7 +41,7 @@
 .menu-class {
   :global {
     .menu-icon {
-      margin-right: 15px;
+      margin-right: 10px;
     }
   }
   .ant-menu-inline-collapsed {
@@ -145,26 +145,55 @@
     }
   }
   &.inline-menu-class {
-    .ant-menu-dark,
-    .ant-menu-dark .ant-menu-sub {
-      background: #1d1e1f;
-    }
-    .ant-menu-dark .ant-menu-inline.ant-menu-sub {
-      background: #000c17;
-    }
-    .ant-menu-item {
-      font-size: 15px;
-      border-bottom: none;
-      top: 0;
-      &-active {
-        background: rgba(57, 57, 57, 0.5);
-        color: rgba(255, 255, 255, 0.9);
+    :global {
+      .ant-menu-dark,
+      .ant-menu-dark .ant-menu-sub {
+        background: #1d1e1f;
       }
-      &-selected {
-        background: #1f7eff;
-        position: relative;
-        font-weight: 700;
-        color: rgba(255, 255, 255, 0.9);
+      .ant-menu-submenu:hover
+        > .ant-menu-submenu-title
+        > .ant-menu-submenu-expand-icon,
+      .ant-menu-submenu:hover
+        > .ant-menu-submenu-title
+        > .ant-menu-submenu-arrow {
+        color: #222b65;
+      }
+      .ant-menu-light .ant-menu-item:hover,
+      .ant-menu-light .ant-menu-item-active,
+      .ant-menu-light .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open,
+      .ant-menu-light .ant-menu-submenu-active,
+      .ant-menu-light .ant-menu-submenu-title:hover {
+        color: #222b65;
+      }
+      .ant-menu-dark .ant-menu-inline.ant-menu-sub {
+        background: #000c17;
+      }
+      .ant-menu-submenu-selected {
+        color: #222b65;
+      }
+      .ant-menu-item {
+        font-size: 14px;
+        border-bottom: none;
+        top: 0;
+        &:active {
+          background: rgba(39, 60, 192, 0.05);
+        }
+        &:hover {
+          background: rgba(39, 60, 192, 0.05);
+          color: rgba(0, 0, 0, 0.85);
+        }
+        &-active {
+          background: rgba(39, 60, 192, 0.05);
+          color: rgba(0, 0, 0, 0.85);
+        }
+        &-selected {
+          position: relative;
+          color: #273cc0;
+          background: rgba(39, 60, 192, 0.16) !important;
+          &::after {
+            border-color: #273cc0;
+          }
+        }
       }
     }
   }

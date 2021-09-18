@@ -74,6 +74,10 @@ const mainRoutes: RouteRecordRaw = {
         import(/* webpackChunkName: "500" */ '@/views/exception/500'),
       meta: { title: '500', permission: ['exception'], hidden: true },
     },
+    // {
+    //   path: '/:pathMatch(.*)*',
+    //   redirect: { name: '404' },
+    // },
   ],
 }
 

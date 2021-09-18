@@ -1,44 +1,65 @@
 {
-  "id": "2115131",
-  "name": "smart",
+  "id": "2822175",
+  "name": "my-project",
   "font_family": "iconfont",
   "css_prefix_text": "icon-",
   "description": "",
   "glyphs": [
     {
-      "icon_id": "1587472",
-      "name": "运维",
-      "font_class": "yunwei1",
-      "unicode": "e601",
-      "unicode_decimal": 58881
+      "icon_id": "714762",
+      "name": "设计师2",
+      "font_class": "shejishi2",
+      "unicode": "e643",
+      "unicode_decimal": 58947
     },
     {
-      "icon_id": "5245063",
-      "name": "管理",
-      "font_class": "guanli",
-      "unicode": "e61f",
-      "unicode_decimal": 58911
+      "icon_id": "8059416",
+      "name": "基础控件图标-公共选择框",
+      "font_class": "jichukongjiantubiao-gonggongxuanzekuang",
+      "unicode": "edf9",
+      "unicode_decimal": 60921
     },
     {
-      "icon_id": "10507700",
-      "name": "资产",
-      "font_class": "zichan",
+      "icon_id": "13795610",
+      "name": "自定义",
+      "font_class": "zidingyi",
+      "unicode": "e723",
+      "unicode_decimal": 59171
+    },
+    {
+      "icon_id": "13901301",
+      "name": "素材",
+      "font_class": "sucai",
+      "unicode": "e833",
+      "unicode_decimal": 59443
+    },
+    {
+      "icon_id": "15633946",
+      "name": "用户管理",
+      "font_class": "yonghuguanli",
       "unicode": "e629",
       "unicode_decimal": 58921
     },
     {
-      "icon_id": "12801584",
-      "name": "首页-选中",
-      "font_class": "shouye-yes",
-      "unicode": "e600",
-      "unicode_decimal": 58880
+      "icon_id": "15773666",
+      "name": "【视图】主视图",
+      "font_class": "shituzhushitu",
+      "unicode": "e650",
+      "unicode_decimal": 58960
     },
     {
-      "icon_id": "15038316",
-      "name": "物联网",
-      "font_class": "wulianwang",
-      "unicode": "e712",
-      "unicode_decimal": 59154
+      "icon_id": "19985212",
+      "name": "首页-选中",
+      "font_class": "index-copy",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
+      "icon_id": "22770862",
+      "name": "数据",
+      "font_class": "shuju",
+      "unicode": "e73c",
+      "unicode_decimal": 59196
     }
   ]
 }

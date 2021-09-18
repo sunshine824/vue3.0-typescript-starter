@@ -10,7 +10,7 @@ import {
 import { mainRoutes, baseRoutes } from './router.config'
 import { getToken } from '@/utils/token'
 import { getPermissionsList } from '@/api/user'
-import { RouteLayout } from '@/layouts'
+import { RouteLayout, BlankLayout } from '@/layouts'
 
 let isAddDynamicMenuRoutes = false // 是否请求路由表
 
@@ -29,24 +29,25 @@ function fnAddDynamicMenuRoutes(
     if (!item.list) {
       routes.push({
         path: `${item.url}`,
-        name: item.url.slice(0, 1) == '/' ? item.url.slice(1) : item.url, // 截取开头"/"
-        component: () => import('../views' + item.moduleUrl + '/index'),
+        name: item.name.slice(0, 1) == '/' ? item.name.slice(1) : item.name, // 截取开头"/"
+        component: () => import('../views' + item.url + '/index'),
         meta: {
-          title: item.name,
+          title: item.title,
           hidden: false,
           icon: item.icon,
         },
       })
     } else if (item.list && item.list.length) {
       const menus = fnAddDynamicMenuRoutes(item.list, [])
+      const paths = item.url.split('/')
       routes.push({
         path: `${item.url}`,
-        name: item.url.slice(0, 1) == '/' ? item.url.slice(1) : item.url, // 截取开头"/"
-        component: RouteLayout,
-        redirect: item.url + '/' + menus[0].path,
+        name: item.name.slice(0, 1) == '/' ? item.name.slice(1) : item.name, // 截取开头"/"
+        component: paths.length > 2 ? BlankLayout : RouteLayout, // 二级路由
+        redirect: menus[0].path,
         children: menus,
         meta: {
-          title: item.name,
+          title: item.title,
           hidden: false,
           icon: item.icon,
         },
@@ -77,17 +78,12 @@ router.beforeEach(
               menu.menuList || [],
               [],
             )
-            // 添加兜底路由
-            menuRoutes.push({
-              path: '/:pathMatch(.*)*',
-              redirect: { name: '404' },
-            })
+            console.log(menuRoutes)
             mainRoutes.children?.unshift(...menuRoutes)
             // 动态添加路由
             router.addRoute(mainRoutes)
             // 注：这步很关键，不然导航获取不到路由
             router.options.routes.unshift(mainRoutes)
-            console.log(router.options)
             // 本地存储按钮权限集合
             sessionStorage.setItem(
               'permissions',

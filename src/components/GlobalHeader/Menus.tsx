@@ -22,14 +22,13 @@ const Menus = defineComponent({
     const activeRoute = ref() // 当前路由
 
     onMounted(() => {
-      const paths = route.path.split('/')
-      activeRoute.value = paths[paths.length - 1]
+      activeRoute.value = route.path
     })
 
     // 默认展开项
     const openKeys = computed(() => {
       if (props.mode == 'inline') {
-        return ['/smart', '/eoms', '/system', '/database']
+        return ['/designCenter/materialMange']
       }
       return []
     })
@@ -41,8 +40,7 @@ const Menus = defineComponent({
 
     // 监听路由变化
     watch(route, (val) => {
-      const paths = val.path.split('/')
-      activeRoute.value = paths[paths.length - 1]
+      activeRoute.value = val.path
     })
 
     // 子级导航渲染
@@ -63,7 +61,7 @@ const Menus = defineComponent({
                 {menus.children.map((menu: any) => {
                   if (!menu.children || !menu.children.length) {
                     return (
-                      <Menu.Item key={menu.name}>
+                      <Menu.Item key={menu.path}>
                         {menus.meta?.icon && (
                           <span
                             class={`iconfont ${menu.meta.icon} menu-icon`}
@@ -88,7 +86,6 @@ const Menus = defineComponent({
         class={`${styles['menu-class']} ${styles[props.mode + '-menu-class']}`}
       >
         <Menu
-          theme="dark"
           selectedKeys={[activeRoute.value]}
           openKeys={openKeys.value}
           mode={props.mode}
@@ -98,7 +95,7 @@ const Menus = defineComponent({
           {(props.menuLists as RouteRecordRaw[]).map((menu) => {
             if (!menu.children || !menu.children.length) {
               return (
-                <Menu.Item key={menu.name}>
+                <Menu.Item key={menu.path}>
                   {menu.meta?.icon && (
                     <span class={`iconfont ${menu.meta.icon} menu-icon`}></span>
                   )}
