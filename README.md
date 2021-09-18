@@ -46,7 +46,7 @@ npm run build
 
 ### 项目截图
 
-<img src="https://github.com/sunshine824/vue3.0-typescript-starter/blob/master/src/assets/screenshot/sreen01.png" width="550" height="300"/>
+<img src="https://github.com/sunshine824/vue3.0-typescript-starter/blob/master/src/assets/screenshot/screen01.png" width="550" height="300"/>
 
 ### 最后
 
