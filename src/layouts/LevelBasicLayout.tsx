@@ -9,6 +9,9 @@ import UserIcon from '../assets/user.png'
 const LevelBasicLayout = defineComponent({
   name: 'LevelBasicLayout',
   setup() {
+    const router = useRouter()
+    const route = useRoute()
+
     // 获取显示状态的路由
     const menuLists = computed(() => {
       const menus = getMenus().filter((item: any) => !item?.meta?.hidden)
@@ -24,9 +27,9 @@ const LevelBasicLayout = defineComponent({
     // 获取子路由
     const subMenuLists = computed(() => {
       let menus: RouteRecordRaw[] = []
-      const names = useRoute().path.split('/')
+      const names = route.path.split('/')
       if (names.length) {
-        getMenus().forEach((item) => {
+        getMenus().forEach((item: RouteRecordRaw) => {
           if (item.name == names[1]) {
             menus = item?.children || []
           }
@@ -38,7 +41,7 @@ const LevelBasicLayout = defineComponent({
     // 获取路由列表
     const getMenus = () => {
       let menuList: RouteRecordRaw[] = []
-      const routes: Array<RouteRecordRaw> = useRouter().options?.routes || []
+      const routes: Array<RouteRecordRaw> = router.options?.routes || []
       routes.forEach((item) => {
         if (item.path == '/') {
           menuList = item.children || []
