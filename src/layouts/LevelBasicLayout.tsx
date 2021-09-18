@@ -72,9 +72,7 @@ const LevelBasicLayout = defineComponent({
             <div class={styles['vertical-sub-menu']}>
               <Menus menuLists={subMenuLists['value']} mode="inline"></Menus>
             </div>
-          ) : (
-            ''
-          )}
+          ) : null}
           {/* 右侧内容区 */}
           <Layout.Content>
             <RouterView />
