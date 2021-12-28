@@ -49,7 +49,7 @@ const Login = defineComponent({
           const { data } = await login(formData)
           sessionStorage.setItem('token', data.token)
           sessionStorage.setItem('userInfo', JSON.stringify(data.userInfo))
-          router.push('/database')
+          router.push('/dataProtal')
           loading.value = false
         } catch (error) {
           loading.value = false

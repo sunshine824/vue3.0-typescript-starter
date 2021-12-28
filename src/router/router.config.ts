@@ -2,49 +2,7 @@ import { RouteRecordRaw } from 'vue-router'
 import { LevelBasicLayout, RouteLayout } from '@/layouts'
 
 // 导航路由
-const Routes: Array<RouteRecordRaw> = [
-  {
-    path: '/home',
-    name: 'home',
-    component: () => import(/* webpackChunkName: "home" */ '@/views/home'),
-    meta: { title: '首页', hidden: true },
-  },
-  {
-    path: '/database',
-    name: 'database',
-    component: () =>
-      import(/* webpackChunkName: "database" */ '@/views/database'),
-    meta: { title: '数据库配置', hidden: false, icon: 'icon-zichan' },
-  },
-  {
-    path: '/smart',
-    name: 'smart',
-    component: () => import(/* webpackChunkName: "smart" */ '@/views/smart'),
-    meta: { title: '物联管理', hidden: false, icon: 'icon-wulianwang' },
-  },
-  {
-    path: '/eoms',
-    name: 'eoms',
-    component: RouteLayout,
-    meta: { title: '运维配置', hidden: false, icon: 'icon-yunwei1' },
-    children: [
-      {
-        path: '/eoms/fault',
-        name: 'fault',
-        component: () =>
-          import(/* webpackChunkName: "fault" */ '@/views/eoms/fault'),
-        meta: { title: '故障处理方案', hidden: false },
-      },
-      {
-        path: '/eoms/alarm',
-        name: 'alarm',
-        component: () =>
-          import(/* webpackChunkName: "alarm" */ '@/views/eoms/alarm'),
-        meta: { title: '告警模板管理', hidden: false },
-      },
-    ],
-  },
-]
+const Routes: Array<RouteRecordRaw> = []
 
 // 主路由
 const mainRoutes: RouteRecordRaw = {

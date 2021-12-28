@@ -4,7 +4,7 @@ import { RouteLayout } from '@/layouts'
 import styles from './index.module.less'
 
 const DataManage = defineComponent({
-  name: 'Database',
+  name: 'DataManage',
   setup() {
     const slots = {
       default: () => <div>数据管理</div>,

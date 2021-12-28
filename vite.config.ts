@@ -1,31 +1,35 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import path from 'path'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import styleImport from 'vite-plugin-style-import'
 
 import { resolve } from 'path'
 
-
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
     alias: {
-      "@": resolve(__dirname, 'src/')
-    }
+      '@': path.join(__dirname, './src'),
+      '@views': path.join(__dirname, './src/views'),
+      '@components': path.join(__dirname, './src/components'),
+      '@utils': path.join(__dirname, './src/utils'),
+      '@public': path.join(__dirname, './src/public'),
+    },
   },
   esbuild: {
     jsxFactory: 'h',
     jsxFragment: 'Fragment',
-    jsxInject: "import { h } from 'vue';"
+    jsxInject: "import { h } from 'vue';",
   },
   build: {
     // 去除console
     terserOptions: {
       compress: {
         drop_console: true,
-        drop_debugger: true
-      }
-    }
+        drop_debugger: true,
+      },
+    },
   },
   plugins: [
     vue(),
@@ -37,21 +41,22 @@ export default defineConfig({
           esModule: true,
           resolveStyle: (name) => {
             return `ant-design-vue/es/${name}/style/index`
-          }
-        }
-      ]
+          },
+        },
+      ],
     }),
   ],
   css: {
     preprocessorOptions: {
       less: {
-        modifyVars: { // 更改主题在这里
+        modifyVars: {
+          // 更改主题在这里
           'link-color': '#1DA57A',
-          'border-radius-base': '2px'
+          'border-radius-base': '2px',
         },
-        javascriptEnabled: true
-      }
-    }
+        javascriptEnabled: true,
+      },
+    },
   },
   server: {
     host: '0.0.0.0',
@@ -66,8 +71,8 @@ export default defineConfig({
         target: 'http://192.168.1.11:9000/dbd-authority',
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace('/dbd-authority/', '')
-      }
-    }
-  }
+        rewrite: (path) => path.replace('/dbd-authority/', ''),
+      },
+    },
+  },
 })

@@ -6,7 +6,7 @@ import styles from './index.module.less'
 
 const ABreadCrumb = defineComponent({
   name: 'ABreadCrumb',
-  setup({ props }) {
+  setup(props) {
     const route = useRoute()
     const router = useRouter()
 

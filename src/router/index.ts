@@ -69,7 +69,7 @@ router.beforeEach(
       if (!isAddDynamicMenuRoutes) {
         try {
           //获取动态路由表
-          const res = await getPermissionsList({})
+          const res: any = await getPermissionsList({})
           if (res.code == 200) {
             isAddDynamicMenuRoutes = true
             const menu = res.data

@@ -86,11 +86,13 @@ const Menus = defineComponent({
         class={`${styles['menu-class']} ${styles[props.mode + '-menu-class']}`}
       >
         <Menu
-          selectedKeys={[activeRoute.value]}
-          openKeys={openKeys.value}
-          mode={props.mode}
+          {...({
+            selectedKeys: [activeRoute.value],
+            openKeys: openKeys.value,
+            mode: props.mode,
+            onClick: handleMenuClick,
+          } as any)}
           style={{ lineHeight: '54px' }}
-          onClick={handleMenuClick}
         >
           {(props.menuLists as RouteRecordRaw[]).map((menu) => {
             if (!menu.children || !menu.children.length) {
