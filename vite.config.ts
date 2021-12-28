@@ -3,8 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import styleImport from 'vite-plugin-style-import'
-
-import { resolve } from 'path'
+import viteCompression from 'vite-plugin-compression'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -23,13 +22,30 @@ export default defineConfig({
     jsxInject: "import { h } from 'vue';",
   },
   build: {
-    // 去除console
+    chunkSizeWarningLimit: 500,
+    minify: 'terser',
+    cssCodeSplit: true, // 如果设置为false，整个项目中的所有 CSS 将被提取到一个 CSS 文件中
     terserOptions: {
       compress: {
-        drop_console: true,
-        drop_debugger: true,
+        drop_console: true, //打包时删除console
+        drop_debugger: true, //打包时删除 debugger
+        pure_funcs: ['console.log'],
+      },
+      output: {
+        // 去掉注释内容
+        comments: true,
       },
     },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // 拆分代码，这个就是分包，配置完后自动按需加载，现在还比不上webpack的splitchunk，不过也能用了。
+          vue: ['vue', 'vue-router', 'vuex'],
+          'ant-design-vue': ['ant-design-vue'],
+        },
+      },
+    },
+    brotliSize: false,
   },
   plugins: [
     vue(),
@@ -45,6 +61,8 @@ export default defineConfig({
         },
       ],
     }),
+    // 打包压缩，主要是本地gzip，如果服务器配置压缩也可以
+    viteCompression(),
   ],
   css: {
     preprocessorOptions: {

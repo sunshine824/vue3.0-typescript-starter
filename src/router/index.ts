@@ -30,7 +30,7 @@ function fnAddDynamicMenuRoutes(
       routes.push({
         path: `${item.url}`,
         name: item.name.slice(0, 1) == '/' ? item.name.slice(1) : item.name, // 截取开头"/"
-        component: () => import('../views' + item.url + '/index'),
+        component: () => import(`../views${item.url}/index`),
         meta: {
           title: item.title,
           hidden: false,

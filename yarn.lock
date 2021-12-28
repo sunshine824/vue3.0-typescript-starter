@@ -764,6 +764,14 @@ chalk@^4.0.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
+chalk@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.npmmirror.com/chalk/download/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
+  integrity sha1-qsTit3NKdAhnrrFr8CqtVWoeegE=
+  dependencies:
+    ansi-styles "^4.1.0"
+    supports-color "^7.1.0"
+
 change-case@^4.1.2:
   version "4.1.2"
   resolved "https://registry.npm.taobao.org/change-case/download/change-case-4.1.2.tgz?cache=0&sync_timestamp=1606867703975&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fchange-case%2Fdownload%2Fchange-case-4.1.2.tgz#fedfc5f136045e2398c0410ee441f95704641e12"
@@ -913,6 +921,13 @@ debug@^4.3.2:
   version "4.3.2"
   resolved "https://registry.nlark.com/debug/download/debug-4.3.2.tgz?cache=0&sync_timestamp=1625374653719&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fdebug%2Fdownload%2Fdebug-4.3.2.tgz#f0a49c18ac8779e31d4a0c6029dfb76873c7428b"
   integrity sha1-8KScGKyHeeMdSgxgKd+3aHPHQos=
+  dependencies:
+    ms "2.1.2"
+
+debug@^4.3.3:
+  version "4.3.3"
+  resolved "https://registry.npmmirror.com/debug/download/debug-4.3.3.tgz#04266e0b70a98d4462e6e288e38259213332b664"
+  integrity sha512-/zxw5+vh1Tfv+4Qn7a5nsbcJKPaSvCDhojn6FEl9vupwK2VCSDtEiEtqr8DFtzYFOdz63LBkxec7DYuc2jon6Q==
   dependencies:
     ms "2.1.2"
 
@@ -1234,6 +1249,15 @@ follow-redirects@^1.10.0:
   resolved "https://registry.nlark.com/follow-redirects/download/follow-redirects-1.14.2.tgz#cecb825047c00f5e66b142f90fed4f515dec789b"
   integrity sha1-zsuCUEfAD15msUL5D+1PUV3seJs=
 
+fs-extra@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.nlark.com/fs-extra/download/fs-extra-10.0.0.tgz#9ff61b655dde53fb34a82df84bb214ce802e17c1"
+  integrity sha1-n/YbZV3eU/s0qC34S7IUzoAuF8E=
+  dependencies:
+    graceful-fs "^4.2.0"
+    jsonfile "^6.0.1"
+    universalify "^2.0.0"
+
 fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/fs.realpath/download/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
@@ -1332,6 +1356,11 @@ graceful-fs@^4.1.2, graceful-fs@^4.2.2:
   version "4.2.6"
   resolved "https://registry.npm.taobao.org/graceful-fs/download/graceful-fs-4.2.6.tgz#ff040b2b0853b23c3d31027523706f1885d76bee"
   integrity sha1-/wQLKwhTsjw9MQJ1I3BvGIXXa+4=
+
+graceful-fs@^4.1.6, graceful-fs@^4.2.0:
+  version "4.2.8"
+  resolved "https://registry.npmmirror.com/graceful-fs/download/graceful-fs-4.2.8.tgz#e412b8d33f5e006593cbd3cee6df9f2cebbe802a"
+  integrity sha1-5BK40z9eAGWTy9PO5t+fLOu+gCo=
 
 has-flag@^3.0.0:
   version "3.0.0"
@@ -1526,6 +1555,15 @@ json5@^2.1.2:
   integrity sha1-Lf7+cgxrpSXZ69kJlQ8FFTFsiaM=
   dependencies:
     minimist "^1.2.5"
+
+jsonfile@^6.0.1:
+  version "6.1.0"
+  resolved "https://registry.nlark.com/jsonfile/download/jsonfile-6.1.0.tgz#bc55b2634793c679ec6403094eb13698a6ec0aae"
+  integrity sha1-vFWyY0eTxnnsZAMJTrE2mKbsCq4=
+  dependencies:
+    universalify "^2.0.0"
+  optionalDependencies:
+    graceful-fs "^4.1.6"
 
 klona@^2.0.4:
   version "2.0.4"
@@ -2287,6 +2325,11 @@ typescript@^4.3.2:
   resolved "https://registry.nlark.com/typescript/download/typescript-4.3.4.tgz?cache=0&sync_timestamp=1624260319959&other_urls=https%3A%2F%2Fregistry.nlark.com%2Ftypescript%2Fdownload%2Ftypescript-4.3.4.tgz#3f85b986945bcf31071decdd96cf8bfa65f9dcbc"
   integrity sha1-P4W5hpRbzzEHHezdls+L+mX53Lw=
 
+universalify@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.nlark.com/universalify/download/universalify-2.0.0.tgz#75a4984efedc4b08975c5aeb73f530d02df25717"
+  integrity sha1-daSYTv7cSwiXXFrrc/Uw0C3yVxc=
+
 unzipper@0.10.11:
   version "0.10.11"
   resolved "https://registry.npm.taobao.org/unzipper/download/unzipper-0.10.11.tgz#0b4991446472cbdb92ee7403909f26c2419c782e"
@@ -2333,6 +2376,15 @@ v8-compile-cache@^2.0.3:
   version "2.3.0"
   resolved "https://registry.nlark.com/v8-compile-cache/download/v8-compile-cache-2.3.0.tgz#2de19618c66dc247dcfb6f99338035d8245a2cee"
   integrity sha1-LeGWGMZtwkfc+2+ZM4A12CRaLO4=
+
+vite-plugin-compression@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.npmmirror.com/vite-plugin-compression/download/vite-plugin-compression-0.4.0.tgz#e462924faa797514e6bd05fd2f0e33cd8403817f"
+  integrity sha512-CGC8DfIey0k4S4o54ylwFIzT1Mjb9s7cMmlXj6DMM1MZZIeWFjPCJc6YZWjnnS28ul3r7R1nmihvYvGg/lOYsQ==
+  dependencies:
+    chalk "^4.1.2"
+    debug "^4.3.3"
+    fs-extra "^10.0.0"
 
 vite-plugin-style-import@^1.0.1:
   version "1.0.1"
