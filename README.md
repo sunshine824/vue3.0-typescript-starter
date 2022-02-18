@@ -5,17 +5,24 @@
 
 Vue2.0 版本：<a href="https://github.com/sunshine824/vue-typescript-starter.git">https://github.com/sunshine824/vue-typescript-starter.git</a>
 
+### 状态库版本
+
+Vuex 版本：<a href="https://github.com/sunshine824/vue3.0-typescript-starter/tree/master">https://github.com/sunshine824/vue3.0-typescript-starter/tree/master</a>
+
+Pinia 版本：<a href="https://github.com/sunshine824/vue3.0-typescript-starter/tree/pinia">https://github.com/sunshine824/vue3.0-typescript-starter/tree/pinia</a>
+
 ### 相关包版本号
 
 所有技术都是当前最新的。
 
-- vue： "^3.0.5",
+- vue： "^3.2.30",
 - typescript : "^4.3.2",
 - ant-design-vue： "2.2.2",
 - vue-router : "^4.0.9",
 - less："^4.1.1",
 - vuex: "^4.0.1"
 - axios："^0.21.1",
+- pinia: "^2.0.11",
 
 ### Build Setup
 
