@@ -1,7 +1,8 @@
 import { defineComponent, reactive, ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { Form, Input, Button, Row, Col, message } from 'ant-design-vue'
 import { uuid } from '@/utils/util'
+import { Form, Input, Button, message } from 'ant-design-vue'
+import { CommonStore } from '@/store/modules/common'
 import GlobalBg from '@/components/GlobalBg'
 import { login } from '@/api/user.ts'
 
@@ -14,6 +15,7 @@ const Login = defineComponent({
     const labelCol = { span: 4 }
     const wrapperCol = { span: 18, offset: 3 }
     const formRef = ref()
+    const common = CommonStore()
 
     let captchaPath = ref('') // 图片验证码地址
 
@@ -47,8 +49,7 @@ const Login = defineComponent({
         loading.value = true
         try {
           const { data } = await login(formData)
-          sessionStorage.setItem('token', data.token)
-          sessionStorage.setItem('userInfo', JSON.stringify(data.userInfo))
+          common.setUserInfo(data)
           router.push('/dataProtal')
           loading.value = false
         } catch (error) {

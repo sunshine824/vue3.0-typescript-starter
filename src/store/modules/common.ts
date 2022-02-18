@@ -1,23 +1,25 @@
-interface State {
-  count: number
-}
+import { defineStore } from 'pinia'
 
-const initPageState = () => {
-  return {
-    count: 1,
-  }
-}
-
-const common = {
-  state: initPageState(),
+export const CommonStore = defineStore('common', {
+  // 状态库
+  state: () => ({
+    userInfo: {}, //用户信息
+  }),
   getters: {
-    getCount: (state: State) => state.count,
+    getUserInfo: (state) => state.userInfo?.userInfo,
   },
-  mutations: {
-    setCountNum(state: State) {
-      state.count++
+  actions: {
+    setUserInfo<T>(data: T) {
+      this.userInfo = data
     },
   },
-}
-
-export default common
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        //storage: localStorage,
+        paths: ['userInfo'],
+      },
+    ],
+  },
+})

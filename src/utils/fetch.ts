@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosInstance } from 'axios'
-import { getToken, removeToken } from './token'
+import { getToken } from './util'
 import { Modal } from 'ant-design-vue'
 import { Message, Notification } from '@/utils/resetMessage'
 
@@ -37,7 +37,7 @@ service.interceptors.response.use(
           title: 'token出错',
           content: 'token失效，请重新登录！',
           onOk: () => {
-            removeToken()
+            sessionStorage.clear()
           },
         })
       } else if (code == 200) {

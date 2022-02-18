@@ -7,8 +7,8 @@ import {
   NavigationGuardNext,
   Router,
 } from 'vue-router'
-import { mainRoutes, baseRoutes } from './router.config'
-import { getToken } from '@/utils/token'
+import { mainRoutes, baseRoutes, Routes } from './router.config'
+import { getToken } from '@/utils/util'
 import { getPermissionsList } from '@/api/user'
 import { RouteLayout, BlankLayout } from '@/layouts'
 
@@ -78,8 +78,8 @@ router.beforeEach(
               menu.menuList || [],
               [],
             )
-            console.log(menuRoutes)
-            mainRoutes.children?.unshift(...menuRoutes)
+            mainRoutes.children = []
+            mainRoutes.children?.unshift(...menuRoutes, ...Routes)
             // 动态添加路由
             router.addRoute(mainRoutes)
             // 注：这步很关键，不然导航获取不到路由

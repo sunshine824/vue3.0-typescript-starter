@@ -1,47 +1,20 @@
 import { defineComponent, computed } from 'vue'
-import { RouterView, RouteRecordRaw, useRouter, useRoute } from 'vue-router'
-import { Layout, Dropdown, Menu } from 'ant-design-vue'
 import { CommonStore } from '@/store/modules/common'
 import { storeToRefs } from 'pinia'
-import { GlobalHeader, Menus, LevelMenus } from '@/components/GlobalHeader'
+import { Layout, Dropdown, Menu } from 'ant-design-vue'
+import { GlobalHeader, Menus } from '@/components/GlobalHeader'
+import { RouterView, RouteRecordRaw, useRouter, useRoute } from 'vue-router'
 
 import styles from './index.module.less'
 import UserIcon from '../assets/user.png'
 
-const LevelBasicLayout = defineComponent({
-  name: 'LevelBasicLayout',
+const SimplifyBasicLayout = defineComponent({
+  name: 'SimplifyBasicLayout',
   setup() {
     const router = useRouter()
-    const route = useRoute()
     const common = CommonStore()
     // common store data
     const { getUserInfo } = storeToRefs(common)
-
-    // 获取显示状态的路由
-    const menuLists = computed(() => {
-      const menus = getMenus().filter((item: any) => !item?.meta?.hidden)
-      menus.forEach((item: any) => {
-        if (item.children) {
-          // 只取第一层
-          delete item.children
-        }
-      })
-      return menus
-    })
-
-    // 获取子路由
-    const subMenuLists = computed(() => {
-      let menus: RouteRecordRaw[] = []
-      const names = route.path.split('/')
-      if (names.length) {
-        getMenus().forEach((item: RouteRecordRaw) => {
-          if (item.name == names[1]) {
-            menus = item?.children || []
-          }
-        })
-      }
-      return menus
-    })
 
     // 获取路由列表
     const getMenus = () => {
@@ -54,6 +27,11 @@ const LevelBasicLayout = defineComponent({
       })
       return JSON.parse(JSON.stringify(menuList))
     }
+
+    // 获取显示状态的路由
+    const menuLists = computed(() => {
+      return getMenus().filter((item: any) => !item?.meta?.hidden)
+    })
 
     // 退出
     const exit = () => {
@@ -74,8 +52,6 @@ const LevelBasicLayout = defineComponent({
     const slots = {
       content: () => (
         <>
-          {/* 导航栏 */}
-          <LevelMenus menuLists={menuLists['value']}></LevelMenus>
           {/* 用户信息 */}
           <div class={styles['user-info']}>
             <Dropdown v-slots={menuSlots}>
@@ -90,18 +66,14 @@ const LevelBasicLayout = defineComponent({
         </>
       ),
     }
-
     return () => (
       <Layout class={styles['level-layout']}>
         <GlobalHeader v-slots={slots}></GlobalHeader>
         <div class={styles['level-content']}>
-          {/* 侧边子目录 */}
-          {subMenuLists['value'].length ? (
-            <div class={styles['vertical-sub-menu']}>
-              <Menus menuLists={subMenuLists['value']} mode="inline"></Menus>
-            </div>
-          ) : null}
-          {/* 右侧内容区 */}
+          {/* 导航栏 */}
+          <div class={styles['vertical-sub-menu']}>
+            <Menus menuLists={menuLists['value']} mode="inline"></Menus>
+          </div>
           <Layout.Content>
             <RouterView />
           </Layout.Content>
@@ -111,4 +83,4 @@ const LevelBasicLayout = defineComponent({
   },
 })
 
-export default LevelBasicLayout
+export default SimplifyBasicLayout

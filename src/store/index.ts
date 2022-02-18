@@ -1,11 +1,6 @@
-import { InjectionKey } from 'vue'
-import { createStore, Store } from 'vuex'
-import common from './modules/common'
+import { createPinia } from 'pinia'
+import piniaPluginPersist from 'pinia-plugin-persist'
 
-export interface State {}
+const store = createPinia().use(piniaPluginPersist)
 
-export const key: InjectionKey<Store<State>> = Symbol()
-
-export const store = createStore<State>({
-  modules: { common },
-})
+export default store
