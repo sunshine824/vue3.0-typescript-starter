@@ -24,6 +24,13 @@ const Routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "500" */ '@/views/exception/500'),
     meta: { title: '500', permission: ['exception'], hidden: true },
   },
+  {
+    path: '/:pathMatch(.*)',
+    name: 'error',
+    component: () =>
+      import(/* webpackChunkName: "404" */ '@/views/exception/404'),
+    meta: { title: '404', hidden: true },
+  },
 ]
 
 // 主路由
