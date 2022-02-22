@@ -1,5 +1,5 @@
-import fetch from '@/utils/fetch'
 import qs from 'qs'
+import fetch from '@/utils/fetch'
 import { IUserApi } from './types/user'
 
 const UserApi: IUserApi = {
