@@ -1,5 +1,3 @@
-import { AxiosPromise } from 'axios'
-
 // 登录参数
 export interface ILoginApiParams {
   username: string // 用户名
