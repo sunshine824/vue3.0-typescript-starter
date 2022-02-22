@@ -44,15 +44,15 @@ service.interceptors.response.use(
         if (status) {
           // 接口请求成功
           msg && Message.success(msg) // 后台如果返回了msg，则将msg提示出来
-          return Promise.resolve(response.data) // 返回成功数据
+          return Promise.resolve(response) // 返回成功数据
         }
         // 接口异常
         msg && Message.warning(msg) // 后台如果返回了msg，则将msg提示出来
-        return Promise.reject(response.data) // 返回异常数据
+        return Promise.reject(response) // 返回异常数据
       } else {
         // 接口异常
         msg && Message.error(msg)
-        return Promise.reject(response.data)
+        return Promise.reject(response)
       }
     }
     return response
@@ -96,4 +96,22 @@ service.interceptors.response.use(
   },
 )
 
-export default service
+interface Http {
+  fetch<T>(params: AxiosRequestConfig): Promise<StoreState.ResType<T>>
+}
+
+const http: Http = {
+  fetch(params) {
+    return new Promise((resolve, reject) => {
+      service(params)
+        .then((res) => {
+          resolve(res.data)
+        })
+        .catch((err) => {
+          reject(err.data)
+        })
+    })
+  },
+}
+
+export default http['fetch']

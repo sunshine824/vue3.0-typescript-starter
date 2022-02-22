@@ -9,7 +9,7 @@ import {
 } from 'vue-router'
 import { mainRoutes, baseRoutes, Routes } from './router.config'
 import { getToken } from '@/utils/util'
-import { getPermissionsList } from '@/api/user'
+import UserApi from '@/api/user'
 import { RouteLayout, BlankLayout } from '@/layouts'
 
 let isAddDynamicMenuRoutes = false // 是否请求路由表
@@ -69,7 +69,7 @@ router.beforeEach(
       if (!isAddDynamicMenuRoutes) {
         try {
           //获取动态路由表
-          const res: any = await getPermissionsList({})
+          const res: any = await UserApi.getPermissionsList({})
           if (res.code == 200) {
             isAddDynamicMenuRoutes = true
             const menu = res.data

@@ -4,7 +4,7 @@ import { uuid } from '@/utils/util'
 import { Form, Input, Button, message } from 'ant-design-vue'
 import { CommonStore } from '@/store/modules/common'
 import GlobalBg from '@/components/GlobalBg'
-import { login } from '@/api/user.ts'
+import UserApi from '@/api/user.ts'
 
 import styles from './index.module.less'
 
@@ -48,7 +48,7 @@ const Login = defineComponent({
         await formRef.value.validate()
         loading.value = true
         try {
-          const { data } = await login(formData)
+          const { data } = await UserApi.login(formData)
           common.setUserInfo(data)
           router.push('/dataProtal')
           loading.value = false

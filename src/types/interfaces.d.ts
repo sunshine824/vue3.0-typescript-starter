@@ -7,11 +7,11 @@
  */
 declare namespace StoreState {
   // 接口返回结构
-  export interface Result {
+  export interface ResType<T> {
     code: number
-    data: any
+    data?: T
+    msg?: string
     status: boolean
-    msg: string
   }
 
   // 请求参数结构
