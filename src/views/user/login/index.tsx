@@ -3,7 +3,7 @@ import { useRouter } from 'vue-router'
 import { Form, Input, Button, Row, Col, message } from 'ant-design-vue'
 import { uuid } from '@/utils/util'
 import GlobalBg from '@/components/GlobalBg'
-import { login } from '@/api/user.ts'
+import UserApi from '@/api/user.ts'
 
 import styles from './index.module.less'
 
@@ -46,7 +46,7 @@ const Login = defineComponent({
         await formRef.value.validate()
         loading.value = true
         try {
-          const { data } = await login(formData)
+          const { data } = await UserApi.login(formData)
           sessionStorage.setItem('token', data.token)
           sessionStorage.setItem('userInfo', JSON.stringify(data.userInfo))
           router.push('/dataProtal')

@@ -1,6 +1,6 @@
 import { defineComponent, computed } from 'vue'
 import { RouterView, RouteRecordRaw, useRouter, useRoute } from 'vue-router'
-import { Layout, Dropdown } from 'ant-design-vue'
+import { Layout, Dropdown, Menu } from 'ant-design-vue'
 import { GlobalHeader, Menus, LevelMenus } from '@/components/GlobalHeader'
 
 import styles from './index.module.less'
@@ -49,6 +49,23 @@ const LevelBasicLayout = defineComponent({
       })
       return JSON.parse(JSON.stringify(menuList))
     }
+
+    // 退出
+    const exit = () => {
+      sessionStorage.clear()
+      router.push('/login')
+    }
+
+    const menuSlots = {
+      overlay: () => (
+        <Menu>
+          <Menu.Item>
+            <span onClick={exit}>退出</span>
+          </Menu.Item>
+        </Menu>
+      ),
+    }
+
     const slots = {
       content: () => (
         <>
@@ -56,7 +73,7 @@ const LevelBasicLayout = defineComponent({
           <LevelMenus menuLists={menuLists['value']}></LevelMenus>
           {/* 用户信息 */}
           <div class={styles['user-info']}>
-            <Dropdown>
+            <Dropdown v-slots={menuSlots}>
               <div>
                 <img src={UserIcon} class={styles['user-head']} />
                 <a class={styles['user-name']}>admin</a>

@@ -3,7 +3,7 @@ import { store, key } from './store'
 import router from './router'
 import moment from 'moment'
 import App from './App'
-import { setupAntd } from './plugins/antd'
+import Antd from 'ant-design-vue'
 
 moment.locale('zh-cn')
 
@@ -16,8 +16,4 @@ import 'ant-design-vue/dist/antd.css'
 
 const app = createApp(App)
 
-setupAntd(app)
-app.use(router)
-app.use(store, key)
-
-app.mount('#app')
+app.use(router).use(store, key).use(Antd).mount('#app')

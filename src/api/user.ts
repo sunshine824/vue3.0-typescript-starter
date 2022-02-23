@@ -1,23 +1,32 @@
-import service from '@/utils/fetch';
 import qs from 'qs'
+import fetch from '@/utils/fetch'
+import { IUserApi } from './types/user'
 
-// 用户登录
-export const login = (params: any): any => service({
-  method: 'post',
-  url: '/login',
-  data: params,
-});
+const UserApi: IUserApi = {
+  // 登录
+  login: (params) => {
+    return fetch({
+      method: 'post',
+      url: '/login',
+      data: params,
+    })
+  },
+  // 注销登录
+  logout: (params) => {
+    return fetch({
+      method: 'get',
+      url: '/logout',
+      data: params,
+    })
+  },
+  // 获取权限列表
+  getPermissionsList: (params) => {
+    return fetch({
+      method: 'get',
+      url: '/navPerson',
+      data: qs.stringify(params),
+    })
+  },
+}
 
-// 用户登出
-export const logout = (params: any) => service({
-  method: 'get',
-  url: '/logout',
-  data: params,
-});
-
-// 获取权限列表
-export const getPermissionsList = (params: any) => service({
-  method: 'get',
-  url: '/navPerson',
-  data: qs.stringify(params),
-});
+export default UserApi
