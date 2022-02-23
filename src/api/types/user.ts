@@ -22,10 +22,8 @@ export interface ILoginApiParams {
   captcha: string // 验证码
   uuid: string // 验证码uuid
 }
-
 // 注销登录参数
 export interface ILogoutParams {}
-
 // 获取用户权限参数
 export interface IPermissionsParams {}
 
