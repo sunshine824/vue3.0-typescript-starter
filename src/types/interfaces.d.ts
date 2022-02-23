@@ -9,7 +9,7 @@ declare namespace StoreState {
   // 接口返回结构
   export interface ResType<T> {
     code: number
-    data?: T
+    data: T
     msg?: string
     status: boolean
   }
