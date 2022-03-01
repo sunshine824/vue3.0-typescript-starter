@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from 'vue-router'
-import { SimplifyBasicLayout, RouteLayout } from '@/layouts'
+import { SimplifyBasicLayout, RouteLayout, LevelBasicLayout } from '@/layouts'
 
 // 导航路由
 const Routes: Array<RouteRecordRaw> = [

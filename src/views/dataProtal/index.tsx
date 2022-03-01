@@ -4,10 +4,10 @@ import { RouteLayout } from '@/layouts'
 import styles from './index.module.less'
 
 const DataProtal = defineComponent({
-  name: 'DataProtal',
+  name: 'DataProtal', 
   setup() {
     const slots = {
-      default: () => <div>数据门户</div>,
+      default: () => <div class={styles['data-protal']}>数据门户</div>,
     }
     return () => <RouteLayout v-slots={slots} isSubView={false}></RouteLayout>
   },
