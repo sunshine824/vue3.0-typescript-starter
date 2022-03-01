@@ -1,6 +1,13 @@
 {
+  "printWidth": 175,
+  "trailingComma": "none",
+  "tabWidth": 2,
+  "useTabs": true,
   "semi": false,
   "singleQuote": true,
-  "arrowParens": "always",
-  "trailingComma": "all"
+  "arrowParens": "avoid",
+  "bracketSpacing": true,
+  "proseWrap": "preserve",
+  "htmlWhitespaceSensitivity": "ignore",
+  "jsxBracketSameLine": true
 }
