@@ -213,12 +213,12 @@ export const uuid = () => {
 
 // token
 export const getToken = () => {
-  const common = JSON.parse(sessionStorage.getItem('common') as string)
+  const common = JSON.parse(localStorage.getItem('common') as string)
   return common?.userInfo?.token
 }
 
 // 获取用户信息
 export const getUserInfo = () => {
-  const common = JSON.parse(sessionStorage.getItem('common') as string)
+  const common = JSON.parse(localStorage.getItem('common') as string)
   return common?.userInfo?.userInfo
 }

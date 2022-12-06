@@ -7,6 +7,7 @@ import { GlobalHeader, Menus, LevelMenus } from '@/components/GlobalHeader'
 
 import styles from './index.module.less'
 import UserIcon from '../assets/user.png'
+import Logo from '../assets/logo.png'
 
 const LevelBasicLayout = defineComponent({
   name: 'LevelBasicLayout',
@@ -72,6 +73,14 @@ const LevelBasicLayout = defineComponent({
     }
 
     const slots = {
+      leftContent: () => (
+        <>
+          <div class={styles['logo']}>
+            <img src={Logo} />
+            <span class={styles['txt']}>智慧城市监控平台</span>
+          </div>
+        </>
+      ),
       content: () => (
         <>
           {/* 导航栏 */}
@@ -82,7 +91,7 @@ const LevelBasicLayout = defineComponent({
               <div>
                 <img src={UserIcon} class={styles['user-head']} />
                 <a class={styles['user-name']}>
-                  {getUserInfo['value']['username']}
+                  {getUserInfo['value']?.['username']}
                 </a>
               </div>
             </Dropdown>

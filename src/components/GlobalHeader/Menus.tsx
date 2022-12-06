@@ -1,6 +1,7 @@
 import { defineComponent, ref, watch, computed, onMounted } from 'vue'
 import { useRoute, useRouter, RouteRecordRaw } from 'vue-router'
 import { Menu } from 'ant-design-vue'
+import { CommonStore } from '@/store/modules/common'
 
 import styles from './index.module.less'
 
@@ -9,28 +10,21 @@ const Menus = defineComponent({
   props: {
     mode: {
       type: String,
-      default: 'horizontal',
+      default: 'horizontal'
     },
     menuLists: {
       type: Array,
-      default: [],
-    },
+      default: []
+    }
   },
-  setup(props, { slots }) {
+  setup(props) {
     const route = useRoute()
     const router = useRouter()
     const activeRoute = ref() // 当前路由
+    const common = CommonStore()
 
     onMounted(() => {
-      activeRoute.value = route.path
-    })
-
-    // 默认展开项
-    const openKeys = computed(() => {
-      if (props.mode == 'inline') {
-        return ['/designCenter/materialMange']
-      }
-      return []
+      activeRoute.value = route.meta?.activePath || route.path
     })
 
     //  路由跳转
@@ -39,8 +33,8 @@ const Menus = defineComponent({
     }
 
     // 监听路由变化
-    watch(route, (val) => {
-      activeRoute.value = val.path
+    watch(route, val => {
+      activeRoute.value = val.meta?.activePath || val.path
     })
 
     // 子级导航渲染
@@ -48,62 +42,67 @@ const Menus = defineComponent({
       return (
         <Menu.SubMenu key={menus.name}>
           {{
+            icon: () => <span class={`iconfont ${menus.meta.icon} menu-icon`}></span>,
             title: () => (
               <>
-                {menus.meta?.icon && (
-                  <span class={`iconfont ${menus.meta.icon} menu-icon`}></span>
-                )}
                 <span>{menus.meta?.title}</span>
               </>
             ),
             default: () => (
               <>
                 {menus.children.map((menu: any) => {
-                  if (!menu.children || !menu.children.length) {
-                    return (
-                      <Menu.Item key={menu.path}>
-                        {menus.meta?.icon && (
-                          <span
-                            class={`iconfont ${menu.meta.icon} menu-icon`}
-                          ></span>
-                        )}
-                        <span>{menu.meta?.title}</span>
-                      </Menu.Item>
-                    )
+                  if ((!menu.children || !menu.children.length)) {
+                    if (!menu.meta?.hidden) {
+                      return (
+                        <Menu.Item key={menu.path} v-slots={menuIcons(menu)}>
+                          <span>{menu.meta?.title}</span>
+                        </Menu.Item>
+                      )
+                    } else {
+                      return null
+                    }
                   } else {
                     return SubItem(menu)
                   }
                 })}
               </>
-            ),
+            )
           }}
         </Menu.SubMenu>
       )
     }
 
+    const menuIcons = (menu:any) => {
+      return {
+        icon: () => (
+          <span>
+            <span class={`iconfont ${menu.meta.icon} menu-icon`}></span>
+          </span>
+        )
+      }
+    }
+
     return () => (
-      <div
-        class={`${styles['menu-class']} ${styles[props.mode + '-menu-class']}`}
-      >
+      <div class={`${styles['menu-class']} ${styles[props.mode + '-menu-class']}`}>
         <Menu
           {...({
             selectedKeys: [activeRoute.value],
-            openKeys: openKeys.value,
             mode: props.mode,
-            onClick: handleMenuClick,
+            inlineCollapsed: common.inlineCollapsed,
+            onClick: handleMenuClick
           } as any)}
-          style={{ lineHeight: '54px' }}
-        >
-          {(props.menuLists as RouteRecordRaw[]).map((menu) => {
+          style={{ lineHeight: '54px' }}>
+          {(props.menuLists as RouteRecordRaw[]).map(menu => {
             if (!menu.children || !menu.children.length) {
-              return (
-                <Menu.Item key={menu.path}>
-                  {menu.meta?.icon && (
-                    <span class={`iconfont ${menu.meta.icon} menu-icon`}></span>
-                  )}
-                  <span>{menu.meta?.title}</span>
-                </Menu.Item>
-              )
+              if (!menu.meta?.hidden) {
+                return (
+                  <Menu.Item key={menu.path} v-slots={menuIcons(menu)}>
+                    <span>{menu.meta?.title}</span>
+                  </Menu.Item>
+                )
+              } else {
+                return null
+              }
             } else {
               return SubItem(menu)
             }
@@ -111,7 +110,7 @@ const Menus = defineComponent({
         </Menu>
       </div>
     )
-  },
+  }
 })
 
 export default Menus

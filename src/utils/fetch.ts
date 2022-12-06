@@ -100,7 +100,7 @@ interface Http {
 	fetch<T>(params: AxiosRequestConfig): Promise<StoreState.ResType<T>>
 }
 
-const http: Http = {
+const http: Http = { 
 	fetch(params) {
 		return new Promise((resolve, reject) => {
 			service(params)
