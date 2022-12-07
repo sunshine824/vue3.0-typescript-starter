@@ -14,6 +14,20 @@ declare namespace StoreState {
     status: boolean
   }
 
+  // 接口分页返回结构
+  export interface ResPage<T> {
+    code: number
+    data: {
+      records: T[] //列表数据
+      total: number //总条数
+      size: number // 每页显示条数
+      current: number // 当前页面
+      pages: number // 总共页数
+    }
+    msg?: string
+    status: boolean
+  }
+
   // 请求参数结构
   export interface FetchParams {
     url: string
@@ -80,15 +94,7 @@ declare namespace StoreState {
 
   // 列表mixin
   export interface TableMixinOptions {
-    queryTableApi: ({}) => any
-    deleteApi: ({}) => any
-  }
-
-  // 列表查询参数
-  export interface TableQueryOptions {
-    orgId?: string
-    pageNo: number
-    pageSize: number
-    [propName: string]: any
+    queryTableApi: ({ }) => any
+    deleteApi: ({ }) => any
   }
 }

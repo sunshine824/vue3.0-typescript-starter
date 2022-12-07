@@ -5,6 +5,32 @@ const BaseUrl = import.meta.env.VITE_API_BASE_URL as string
 
 const Roles = [
   {
+    url: '/userManage',
+    name: '/userManage',
+    title: '用户管理',
+    icon: 'icon-yonghuguanli',
+  },
+  {
+    url: '/authManage',
+    name: '/authManage',
+    title: '权限管理',
+    icon: 'icon-yonghuguanli',
+    list: [
+      {
+        url: '/authManage/menu',
+        name: 'authManage/menu',
+        title: '菜单管理',
+        icon: 'icon-shituzhushitu',
+      },
+      {
+        url: '/authManage/role',
+        name: 'authManage/role',
+        title: '角色管理',
+        icon: 'icon-shituzhushitu',
+      },
+    ]
+  },
+  {
     url: '/dataProtal', // 模块路径&访问路由
     name: '/dataProtal',
     title: '数据门户',
@@ -49,12 +75,6 @@ const Roles = [
         ],
       },
     ],
-  },
-  {
-    url: '/userManage',
-    name: '/userManage',
-    title: '用户管理',
-    icon: 'icon-yonghuguanli',
   },
 ]
 

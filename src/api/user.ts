@@ -26,7 +26,47 @@ const UserApi: IUserApi = {
 			url: '/navPerson',
 			data: qs.stringify(params)
 		})
-	}
+	},
+	// 查询分页
+	getPage: params => {
+		return fetch({
+			method: 'post',
+			url: '/sysUserInfo/getPage',
+			data: qs.stringify(params)
+		})
+	},
+	// 删除用户
+	deleteUser: params => {
+		return fetch({
+			method: 'post',
+			url: '/sysUserInfo/delete',
+			data: qs.stringify(params)
+		})
+	},
+	// 查询机构树
+	getTree: params => {
+		return fetch({
+			method: 'post',
+			url: '/sysOrgInfo/getTree',
+			data: qs.stringify(params)
+		})
+	},
+	// 新增用户
+	addUser: params => {
+		return fetch({
+			method: 'post',
+			url: '/sysUserInfo/add',
+			data: qs.stringify(params)
+		})
+	},
+	// 新增用户
+	editUser: params => {
+		return fetch({
+			method: 'post',
+			url: '/sysUserInfo/edit',
+			data: qs.stringify(params)
+		})
+	},
 }
 
 export default UserApi

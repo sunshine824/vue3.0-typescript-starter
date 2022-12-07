@@ -1,6 +1,6 @@
 import { defineComponent, onMounted, ref, watch } from 'vue'
 import { RouteRecordRaw, useRoute, useRouter } from 'vue-router'
-import router from '../../router'
+import router from '../../router/dynamic'
 
 import styles from './index.module.less'
 

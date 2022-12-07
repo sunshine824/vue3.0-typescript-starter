@@ -1,11 +1,8 @@
 import { createApp } from 'vue'
 import store from './store'
 import router from './router'
-import moment from 'moment'
 import App from './App'
 import Antd from 'ant-design-vue'
-
-moment.locale('zh-cn')
 
 import '@/mock'
 
