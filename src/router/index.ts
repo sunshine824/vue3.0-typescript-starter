@@ -8,6 +8,7 @@ mainRoutes.children = [
 		name: 'userManage',
 		component: () => import('@/views/userManage/index.vue'),
 		meta: {
+			auth: true, // 是否需要登录权限
 			title: '用户管理',
 			hidden: false,
 			icon: 'icon-yonghuguanli'
@@ -17,19 +18,20 @@ mainRoutes.children = [
 		path: '/authManage',
 		name: 'authManage',
 		component: RouteLayout,
+		redirect: '/authManage/menu',
 		meta: { title: '权限管理', hidden: false, icon: 'icon-shuju' },
 		children: [
 			{
 				path: '/authManage/menu',
 				name: 'authManage/menu',
 				component: () => import('@/views/authManage/menu/index.vue'),
-				meta: { title: '菜单管理', hidden: false, icon: 'icon-shuju' }
+				meta: { title: '菜单管理', hidden: false, icon: 'icon-shuju', auth: true }
 			},
 			{
 				path: '/authManage/role',
 				name: 'authManage/role',
 				component: () => import('@/views/authManage/role/index.vue'),
-				meta: { title: '角色管理', hidden: false, icon: 'icon-shuju' }
+				meta: { title: '角色管理', hidden: false, icon: 'icon-shuju', auth: true }
 			}
 		]
 	},
@@ -100,9 +102,17 @@ const router: Router = createRouter({
 router.beforeEach((to, from, next) => {
 	const commonStore = localStorage.getItem('common') as string
 	const userInfo = JSON.parse(commonStore)?.userInfo
-	if (to.path === '/login') next()
-	if (!userInfo) {
-		next({ path: '/login' })
+	if (to.meta.auth) {
+		// 判断路由是否需要登录权限
+		if (userInfo) {
+			if (to.path == '/login') {
+				next('/userManage')
+			} else {
+				next()
+			}
+		} else {
+			next('/login')
+		}
 	} else {
 		next()
 	}

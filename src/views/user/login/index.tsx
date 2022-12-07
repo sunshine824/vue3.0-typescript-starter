@@ -4,15 +4,15 @@ import { uuid } from '@/utils/util'
 import { Form, Input, Button, message } from 'ant-design-vue'
 import { CommonStore } from '@/store/modules/common'
 import GlobalBg from '@/components/GlobalBg'
-import UserApi from '@/api/user.ts' 
+import UserApi from '@/api/user.ts'
 
-import styles from './index.module.less' 
+import styles from './index.module.less'
 
 const Login = defineComponent({
-  name: 'Login', 
-  setup(props) { 
+  name: 'Login',
+  setup(props) {
     const router = useRouter()
-    const labelCol = { span: 4 } 
+    const labelCol = { span: 4 }
     const wrapperCol = { span: 18, offset: 3 }
     const formRef = ref()
     const common = CommonStore()
@@ -50,7 +50,7 @@ const Login = defineComponent({
         try {
           const { data } = await UserApi.login(formData)
           common.setUserInfo(data)
-          router.push('/dataProtal')
+          router.push('/userManage')
           loading.value = false
         } catch (error) {
           loading.value = false
