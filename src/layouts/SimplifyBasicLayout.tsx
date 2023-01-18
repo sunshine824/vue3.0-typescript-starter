@@ -1,4 +1,4 @@
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, ref, inject } from 'vue'
 import { CommonStore } from '@/store/modules/common'
 import { storeToRefs } from 'pinia'
 import { Layout, Dropdown, Menu } from 'ant-design-vue'
@@ -13,10 +13,14 @@ import Logo from '../assets/logo.png'
 const SimplifyBasicLayout = defineComponent({
 	name: 'SimplifyBasicLayout',
 	setup() {
+		const lang = ref(localStorage.getItem('localLang') || 'zh-cn')
 		const router = useRouter()
 		const common = CommonStore()
 		// common store data
 		const { getUserInfo } = storeToRefs(common)
+
+		// 注入切换语言方法
+		const changeLang = inject('changeLang')
 
 		// 获取路由列表
 		const getMenus = () => {
@@ -65,6 +69,13 @@ const SimplifyBasicLayout = defineComponent({
 			),
 			content: () => (
 				<>
+					{/* 语言切换 */}
+					<div class="switch-lang">
+						<a-select onSelect={changeLang} v-model={[lang['value'], 'value']} style="width:100%" placeholder="语言切换">
+							<a-select-option value='zh-cn'>中文</a-select-option>
+							<a-select-option value='en'>英文</a-select-option>
+						</a-select>
+					</div>
 					{/* 用户信息 */}
 					<div class="user-info">
 						<Dropdown v-slots={menuSlots}>

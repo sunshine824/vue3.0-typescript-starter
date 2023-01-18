@@ -10,7 +10,7 @@
 // 新增部门参数
 export interface IAddDepartParams {
 	guid?: string // id
-	parentGuid: string // 绑定菜单
+	parentId: string // 绑定菜单
 	name: string // 角色名
 	remark: string // 备注
 	[key: string]: any
@@ -24,5 +24,4 @@ export interface IDepartApi {
 	addSysDepart: (params: IAddDepartParams) => Promise<StoreState.ResType<any>>
 	updateSysDepart: (params: IAddDepartParams) => Promise<StoreState.ResType<any>>
 	deleteSysDepart: (params: { guid: string }) => Promise<StoreState.ResType<any>>
-	getSysDepart: (params: { name: string }) => Promise<StoreState.ResType<any>>
 }

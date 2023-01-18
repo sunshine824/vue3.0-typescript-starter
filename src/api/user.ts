@@ -7,7 +7,7 @@ const UserApi: IUserApi = {
 	login: params => {
 		return fetch({
 			method: 'post',
-			url: '/login',
+			url: '/auth/login',
 			data: params
 		})
 	},
@@ -31,8 +31,8 @@ const UserApi: IUserApi = {
 	getPage: params => {
 		return fetch({
 			method: 'post',
-			url: '/sysUserInfo/getPage',
-			data: qs.stringify(params)
+			url: '/user/getPage',
+			data: params
 		})
 	},
 	// 删除用户
@@ -47,8 +47,8 @@ const UserApi: IUserApi = {
 	getTree: params => {
 		return fetch({
 			method: 'post',
-			url: '/sysOrgInfo/getTree',
-			data: qs.stringify(params)
+			url: '/organization/getTree',
+			params
 		})
 	},
 	// 新增用户
@@ -66,7 +66,7 @@ const UserApi: IUserApi = {
 			url: '/sysUserInfo/edit',
 			data: qs.stringify(params)
 		})
-	},
+	}
 }
 
 export default UserApi

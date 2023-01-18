@@ -77,11 +77,11 @@ export default defineConfig({
 
 		// 设置代理，根据我们项目实际情况配置
 		proxy: {
-			'/dbd-authority': {
-				target: 'http://192.168.1.11:9000/dbd-authority',
+			'/api': {
+				target: 'http://0.0.0.0:9080/api',
 				changeOrigin: true,
 				secure: false,
-				rewrite: path => path.replace('/dbd-authority/', '')
+				rewrite: path => path.replace('/api/', '')
 			}
 		}
 	}

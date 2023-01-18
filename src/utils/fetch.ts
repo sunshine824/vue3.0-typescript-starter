@@ -18,7 +18,7 @@ const service: AxiosInstance = axios.create({
  */
 service.interceptors.request.use(
 	(config: AxiosRequestConfig) => {
-		config.headers.common.Authorization = getToken() // 请求头带上token
+		config.headers.common.Authorization = `Bearer ${getToken()}` // 请求头带上token
 		config.headers.common.token = getToken()
 		return config
 	},
@@ -40,7 +40,7 @@ service.interceptors.response.use(
 						sessionStorage.clear()
 					}
 				})
-			} else if (code == 200) {
+			} else if (code == 200 || code == 0) {
 				if (status) {
 					// 接口请求成功
 					msg && Message.success(msg) // 后台如果返回了msg，则将msg提示出来
@@ -100,7 +100,7 @@ interface Http {
 	fetch<T>(params: AxiosRequestConfig): Promise<StoreState.ResType<T>>
 }
 
-const http: Http = { 
+const http: Http = {
 	fetch(params) {
 		return new Promise((resolve, reject) => {
 			service(params)

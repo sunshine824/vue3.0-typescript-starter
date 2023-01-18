@@ -7,32 +7,24 @@ const DepartApi: IDepartApi = {
 	addSysDepart: params => {
 		return fetch({
 			method: 'post',
-			url: '/sysOrgInfo/add',
-			data: qs.stringify(params)
+			url: '/organization/add',
+			data: params
 		})
 	},
 	// 修改部门信息
 	updateSysDepart: params => {
 		return fetch({
 			method: 'post',
-			url: '/sysOrgInfo/edit',
-			data: qs.stringify(params)
+			url: '/organization/edit',
+			data: params
 		})
 	},
 	// 删除部门
 	deleteSysDepart: params => {
 		return fetch({
 			method: 'post',
-			url: '/sysOrgInfo/delete',
-			data: qs.stringify(params)
-		})
-	},
-	// 查询部门列表
-	getSysDepart: params => {
-		return fetch({
-			method: 'post',
-			url: '/sysOrgInfo/getList',
-			data: qs.stringify(params)
+			url: '/organization/delete',
+			params
 		})
 	}
 }

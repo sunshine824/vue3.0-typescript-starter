@@ -9,7 +9,7 @@ const user = Mock.mock({
   address: '成都市高新区天府四街'
 });
 
-Mock.mock(`${BaseUrl}/login`, 'post', ({ body }: { body: string }) => {
+Mock.mock(`${BaseUrl}/auth/login`, 'post', ({ body }: { body: string }) => {
   const result = new Result();
   const { username, password } = JSON.parse(body);
 

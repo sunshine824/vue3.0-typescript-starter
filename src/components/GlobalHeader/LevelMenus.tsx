@@ -1,5 +1,6 @@
 import { defineComponent, onMounted, ref, watch } from 'vue'
 import { RouteRecordRaw, useRoute, useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import router from '../../router/dynamic'
 
 import styles from './index.module.less'
@@ -18,6 +19,8 @@ const LevelMenus = defineComponent({
 		const router = useRouter()
 
 		const baseUrl = ref() // 当前跳转基础路由
+
+		const { t } = useI18n()
 
 		onMounted(() => {
 			const paths = route.path.split('/')
@@ -46,7 +49,7 @@ const LevelMenus = defineComponent({
 						return (
 							<li onClick={skipTo.bind(this, menu)} class={menu.path == baseUrl.value && styles['active']}>
 								<span class={`iconfont ${menu?.meta?.icon} menu-icon`}></span>
-								<span class={styles['title']}>{menu?.meta?.title}</span>
+								<span class={styles['title']}>{t(menu?.meta?.title as string)}</span>
 							</li>
 						)
 					})}

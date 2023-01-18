@@ -49,6 +49,7 @@ const Login = defineComponent({
         loading.value = true
         try {
           const { data } = await UserApi.login(formData)
+          console.log(data)
           common.setUserInfo(data)
           router.push('/userManage')
           loading.value = false

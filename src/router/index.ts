@@ -9,7 +9,7 @@ mainRoutes.children = [
 		component: () => import('@/views/userManage/index.vue'),
 		meta: {
 			auth: true, // 是否需要登录权限
-			title: '用户管理',
+			title: 'menu.userManage', // i18n
 			hidden: false,
 			icon: 'icon-yonghuguanli'
 		}
@@ -19,19 +19,19 @@ mainRoutes.children = [
 		name: 'authManage',
 		component: RouteLayout,
 		redirect: '/authManage/menu',
-		meta: { title: '权限管理', hidden: false, icon: 'icon-shuju' },
+		meta: { title: 'menu.authManage', hidden: false, icon: 'icon-shuju' },
 		children: [
 			{
 				path: '/authManage/menu',
 				name: 'authManage/menu',
 				component: () => import('@/views/authManage/menu/index.vue'),
-				meta: { title: '菜单管理', hidden: false, icon: 'icon-shuju', auth: true }
+				meta: { title: 'menu.menuManage', hidden: false, icon: 'icon-shuju', auth: true }
 			},
 			{
 				path: '/authManage/role',
 				name: 'authManage/role',
 				component: () => import('@/views/authManage/role/index.vue'),
-				meta: { title: '角色管理', hidden: false, icon: 'icon-shuju', auth: true }
+				meta: { title: 'menu.roleManage', hidden: false, icon: 'icon-shuju', auth: true }
 			}
 		]
 	},
@@ -40,7 +40,7 @@ mainRoutes.children = [
 		name: 'dataProtal',
 		component: () => import('@/views/dataProtal'),
 		meta: {
-			title: '数据门户',
+			title: 'menu.dataProtal',
 			hidden: false,
 			icon: 'icon-index-copy'
 		}
@@ -50,45 +50,10 @@ mainRoutes.children = [
 		name: 'dataManage',
 		component: () => import('@/views/dataManage'),
 		meta: {
-			title: '数据管理',
+			title: 'menu.dataManage',
 			hidden: false,
 			icon: 'icon-shuju'
 		}
-	},
-	{
-		path: '/designCenter',
-		name: 'designCenter',
-		component: RouteLayout,
-		redirect: '/designCenter/screenManage',
-		meta: { title: '设计中心', hidden: false, icon: 'icon-shejishi2' },
-		children: [
-			{
-				path: '/designCenter/screenManage',
-				name: 'designCenter/screenManage',
-				component: () => import('@/views/designCenter/screenManage'),
-				meta: { title: '画面管理', hidden: false, icon: 'icon-shituzhushitu' }
-			},
-			{
-				path: '/designCenter/materialMange',
-				name: 'designCenter/materialMange',
-				component: BlankLayout,
-				meta: { title: '素材中心', hidden: false, icon: 'icon-sucai' },
-				children: [
-					{
-						path: '/designCenter/materialMange/customControl',
-						name: 'designCenter/materialMange/customControl',
-						component: () => import('@/views/designCenter/materialMange/customControl'),
-						meta: { title: '自定义控件', hidden: false, icon: 'icon-sucai' }
-					},
-					{
-						path: '/designCenter/materialMange/customMaterial',
-						name: 'designCenter/materialMange/customMaterial',
-						component: () => import('@/views/designCenter/materialMange/customMaterial'),
-						meta: { title: '自定义素材', hidden: false, icon: 'icon-jichukongjiantubiao-gonggongxuanzekuang' }
-					}
-				]
-			}
-		]
 	},
 	...Routes
 ]

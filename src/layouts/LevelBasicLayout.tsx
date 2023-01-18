@@ -1,4 +1,4 @@
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, inject, ref } from 'vue'
 import { RouterView, RouteRecordRaw, useRouter, useRoute } from 'vue-router'
 import { Layout, Dropdown, Menu } from 'ant-design-vue'
 import { CommonStore } from '@/store/modules/common'
@@ -15,8 +15,12 @@ const LevelBasicLayout = defineComponent({
     const router = useRouter()
     const route = useRoute()
     const common = CommonStore()
+    const lang = ref(localStorage.getItem('localLang') || 'zh-cn')
     // common store data
     const { getUserInfo } = storeToRefs(common)
+
+    // 注入切换语言方法
+    const changeLang = inject('changeLang')
 
     // 获取显示状态的路由
     const menuLists = computed(() => {
@@ -85,6 +89,13 @@ const LevelBasicLayout = defineComponent({
         <>
           {/* 导航栏 */}
           <LevelMenus menuLists={menuLists['value']}></LevelMenus>
+          {/* 语言切换 */}
+          <div class={styles['switch-lang']}>
+            <a-select onSelect={changeLang} v-model={[lang['value'], 'value']} style="width:100%" placeholder="语言切换">
+              <a-select-option value='zh-cn'>中文</a-select-option>
+              <a-select-option value='en'>英文</a-select-option>
+            </a-select>
+          </div>
           {/* 用户信息 */}
           <div class={styles['user-info']}>
             <Dropdown v-slots={menuSlots}>

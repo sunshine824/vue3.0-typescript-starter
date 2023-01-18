@@ -15,9 +15,17 @@
 		</div>
 		<a-input-search class="search-box" v-model:value="state.searchVal" placeholder="请输入关键词" @search="handleSearch" />
 		<div class="depart-tree">
-			<a-tree v-model:checkedKeys="state.checkedKeys" @select="$attrs.onSelectTree" v-if="treeData?.length" checkable :checkStrictly="true" :tree-data="treeData">
-				<template #title="{ title, key }">
-					<span class="txt">{{ title }}</span>
+			<a-tree
+				v-model:checkedKeys="state.checkedKeys"
+				:replaceFields="replaceFields"
+				@select="$attrs.onSelectTree"
+				v-if="treeData?.length"
+				checkable
+				:checkStrictly="true"
+				:tree-data="treeData"
+			>
+				<template #title="{ name }">
+					<span class="txt">{{ name }}</span>
 				</template>
 			</a-tree>
 			<div class="empty-box" v-else>暂无组织部门 ~</div>
@@ -48,6 +56,10 @@ const props = defineProps({
 
 const attrs: any = useAttrs()
 const departFormRef = ref(null)
+const replaceFields = {
+	title: 'name',
+	key: 'id'
+} // 替换对应字段
 
 const state = reactive({
 	searchVal: '',
@@ -56,11 +68,7 @@ const state = reactive({
 
 // 查询部门列表
 const handleSearch = async () => {
-	const [err, res] = await to(
-		DepartApi.getSysDepart({
-			name: state.searchVal
-		})
-	)
+	attrs.onGetTreeMt({ name: state.searchVal })
 }
 // 删除部门
 const handleDelete = async () => {
@@ -80,7 +88,7 @@ const handleDelete = async () => {
 const onDetele = async () => {
 	const [err, res] = await to(
 		DepartApi.deleteSysDepart({
-			guid: state.checkedKeys['checked'].join(',')
+			id: state.checkedKeys['checked'].join(',')
 		})
 	)
 	if (res) {
@@ -97,7 +105,7 @@ const handleAddDepart = () => {
 		return
 	}
 	departFormRef['value'].show({
-		parentGuid: state.checkedKeys['checked']
+		parentId: state.checkedKeys['checked']
 	})
 }
 </script>

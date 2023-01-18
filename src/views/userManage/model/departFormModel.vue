@@ -4,8 +4,8 @@
 			<a-form-item ref="name" label="部门名称" name="name">
 				<a-input placeholder="请输入部门名称" v-model:value="formState.name" />
 			</a-form-item>
-			<a-form-item ref="parentGuid" label="上级部门" name="parentGuid">
-				<a-tree-select :fieldNames="replaceFields" v-model:value="formState.parentGuid" style="width: 100%" :tree-data="treeData" allow-clear placeholder="请选择上级部门" />
+			<a-form-item ref="parentId" label="上级部门" name="parentId">
+				<a-tree-select :fieldNames="replaceFields" v-model:value="formState.parentId" style="width: 100%" :tree-data="treeData" allow-clear placeholder="请选择上级部门" />
 			</a-form-item>
 			<a-form-item ref="remark" label="部门备注" name="remark">
 				<a-input placeholder="请输入部门备注" v-model:value="formState.remark" />
@@ -40,12 +40,12 @@ const loading = ref(false) // 提交状态
 const labelCol = { span: 4 }
 const wrapperCol = { span: 19 }
 const replaceFields = {
-	value: 'key',
-	label: 'title'
+	value: 'id',
+	label: 'name'
 } // tree字段映射关系
 const formState = reactive<IAddDepartParams>({
 	guid: '',
-	parentGuid: '', //父级部门
+	parentId: '', //父级部门
 	name: '', //部门名称
 	remark: '' //部门备注
 })
@@ -75,15 +75,15 @@ const resetForm = () => {
 	formRef.value.resetFields()
 }
 // 显示model框
-const show = record => {
+const show = (record: any) => {
 	if (record.guid) {
 		Object.keys(formState).forEach(key => {
-			if (key != 'parentGuid') {
+			if (key != 'parentId') {
 				formState[key] = record[key]
 			}
 		})
 	}
-	formState['parentGuid'] = record['parentGuid']?.length ? record['parentGuid'][0] : null
+	formState['parentId'] = record['parentId']?.length ? record['parentId'][0] : null
 	visible['value'] = true
 }
 // 因此model框

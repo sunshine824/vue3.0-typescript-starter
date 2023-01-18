@@ -1,12 +1,14 @@
 import { defineComponent, watch, Ref, ref, onMounted } from 'vue'
 import { useRoute, useRouter, RouteRecordRaw } from 'vue-router'
 import { Breadcrumb } from 'ant-design-vue'
+import { useI18n } from 'vue-i18n'
 
 import styles from './index.module.less'
 
 const ABreadCrumb = defineComponent({
   name: 'ABreadCrumb',
   setup(props) {
+    const { t } = useI18n()
     const route = useRoute()
     const router = useRouter()
 
@@ -64,7 +66,7 @@ const ABreadCrumb = defineComponent({
         <span class={styles['location']}>当前位置：</span>
         <Breadcrumb>
           {breadList['value'].map((item) => {
-            return <Breadcrumb.Item>{item}</Breadcrumb.Item>
+            return <Breadcrumb.Item>{t(item)}</Breadcrumb.Item>
           })}
         </Breadcrumb>
       </div>

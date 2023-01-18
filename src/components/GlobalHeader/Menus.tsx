@@ -1,5 +1,6 @@
 import { defineComponent, ref, watch, computed, onMounted } from 'vue'
 import { useRoute, useRouter, RouteRecordRaw } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { Menu } from 'ant-design-vue'
 import { CommonStore } from '@/store/modules/common'
 
@@ -18,6 +19,7 @@ const Menus = defineComponent({
     }
   },
   setup(props) {
+    const { t } = useI18n()
     const route = useRoute()
     const router = useRouter()
     const activeRoute = ref() // 当前路由
@@ -45,7 +47,7 @@ const Menus = defineComponent({
             icon: () => <span class={`iconfont ${menus.meta.icon} menu-icon`}></span>,
             title: () => (
               <>
-                <span>{menus.meta?.title}</span>
+                <span>{t(menus.meta?.title as string)}</span>
               </>
             ),
             default: () => (
@@ -55,7 +57,7 @@ const Menus = defineComponent({
                     if (!menu.meta?.hidden) {
                       return (
                         <Menu.Item key={menu.path} v-slots={menuIcons(menu)}>
-                          <span>{menu.meta?.title}</span>
+                          <span>{t(menu.meta?.title as string)}</span>
                         </Menu.Item>
                       )
                     } else {
@@ -72,7 +74,7 @@ const Menus = defineComponent({
       )
     }
 
-    const menuIcons = (menu:any) => {
+    const menuIcons = (menu: any) => {
       return {
         icon: () => (
           <span>
@@ -97,7 +99,7 @@ const Menus = defineComponent({
               if (!menu.meta?.hidden) {
                 return (
                   <Menu.Item key={menu.path} v-slots={menuIcons(menu)}>
-                    <span>{menu.meta?.title}</span>
+                    <span>{t(menu.meta?.title as string)}</span>
                   </Menu.Item>
                 )
               } else {
