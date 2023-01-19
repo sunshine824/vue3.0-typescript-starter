@@ -28,9 +28,9 @@
 					</template>
 					<template #table>
 						<a-table class="my-table" :loading="loading" :row-key="record => record.guid" :row-selection="{
-	selectedRowKeys: selectRowKeys,
-	onChange: selectChange
-}" @change="tableChange" :pagination="pagination" :columns="columns" :data-source="tableData" :scroll="{ x: '100%' }">
+							selectedRowKeys: selectRowKeys,
+							onChange: selectChange
+						}" @change="tableChange" :pagination="pagination" :columns="columns" :data-source="tableData" :scroll="{ x: '100%' }">
 							<template #bodyCell="{ column, record, index }">
 								<template v-if="column.key == 'index'">
 									<span>{{ index + 1 }}</span>
