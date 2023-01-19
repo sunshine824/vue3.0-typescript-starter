@@ -20,6 +20,7 @@
 │   ├── api                     # 接口管理模块
 │   ├── assets                  # 静态资源模块
 │   ├── components              # 公共组件模块
+│   ├── i18n                    # 国际化模块
 │   ├── mock                    # mock接口模拟模块
 │   ├── layouts                 # 公共自定义布局
 │   ├── main.ts                 # 入口文件
@@ -107,7 +108,7 @@ setup(){
 ```
 使用computed获取
 ```js
-const userInfo = computed(() => common.userInfo)
+const userInfo = computed(() => commonStore.userInfo)
 ```
 使用Pinia提供的**storeToRefs**
 
@@ -464,6 +465,129 @@ export interface IUserApi {
 }
 
 ```
+
+## 国际化配置
+
+### 安装
+引入i18n依赖包，注意vue3中配置i18n需要安装 [V9+版本](https://github.com/intlify/vue-i18n-next)、
+
+```
+npm install vue-i18n@9
+```
+### 配置
+该脚手架i18n采用模块化的设计思路：
+>`src/i18n/model`对应不同模块的国际化文件（根据实际业务创建），`src/i18n/lang`对应不同语言包（集成所有模块的语言定义），`src/i18n/index.ts`创建i18n实例，并导出。
+```js
+//src/model/menu.ts
+export default {
+    zh: {
+        userManage: '用户管理'
+    },
+    en: {
+        userManage: 'User Manage'
+    }
+}
+```
+
+```js
+//src/lang/en_US.ts
+import Menu from '../model/menu'
+
+export default {
+	menu: Menu.en
+}
+```
+
+```js
+// src/i18n/index.ts
+import { createI18n } from 'vue-i18n'
+
+import zh_CN from './lang/zh_CN'
+import en from './lang/en_US'
+
+const localLang = localStorage.getItem('localLang')
+
+const i18n = createI18n({
+	legacy: false, 
+	globalInjection: true, // 全局模式，可以直接使用 $t
+	locale: localLang as string,
+	messages: {
+		'zh-cn': zh_CN, // 中文语言包
+		en: en // 英文语言包
+	}
+})
+
+export default i18n
+```
+其中 `createI18n`配置项中：  
+- `legacy`：默认值为false，当使用 Composition API 时需要设置成true，否则会报以下类型错误：
+![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/32a70692d65f442780c31ff48dfccba0~tplv-k3u1fbpfcp-watermark.image?)
+- `globalInjection`: 默认值为true， true: 可以直接使用 `$t`声明，如$t('menu.authManage')；false: 通过局部组件单独引入的形式，下面会提到。
+- `locale`: 当前展示的语言，**ps：需注意与messages定义的key名称对应**
+- `messages`: 不同语言对应的语言包集合
+
+### 在main.ts中引入
+
+```
+// src/main.ts 
+...
+import i18n from '@/i18n'
+app.use(i18n)
+...
+```
+### 如何在文件中使用
+上文说到在创建`createI18n`实例时有一个`globalInjection`配置项，配置的不同，使用方式也不同，具体如下：  
+- globalInjection:false
+
+```
+<template>
+    {{t('menu.userManage')}}
+</template>
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+</script>
+```
+- globalInjection:true
+```
+<template>
+    {{$t('menu.userManage')}}
+</template>
+<script setup lang="ts">
+</script>
+```
+### 切换语言
+
+在App.ts中`provide`一个切换语言的方法`changeLang`，主要代码如下：
+
+```js
+//src/App.ts
+...
+import { provide } from 'vue'
+import { useI18n } from 'vue-i18n'
+const { locale } = useI18n()
+// setup
+const changeLang = (lang: string) => {
+  locale['value'] = lang
+  localStorage.setItem('localLang', lang)
+}
+```
+调用`changeLang`方法
+
+```js
+import { inject } from 'vue'
+// 注入切换语言方法
+const changeLang = inject('changeLang')
+
+<div class="switch-lang">
+        <a-select @select="changeLang" v-model:value="lang" placeholder="语言切换">
+                <a-select-option value='zh-cn'>中文</a-select-option>
+                <a-select-option value='en'>英文</a-select-option>
+        </a-select>
+</div>
+```
+
 ## Router4
 1. 基础路由
 ```js
@@ -579,10 +703,10 @@ router.beforeEach(
 - BlankLayout.tsx: 空白布局，只做路由分发
 - RouteLayout.tsx: 主体布局，内容显示部分，包含面包屑
 - LevelBasicLayout.tsx 多级展示布局，适用于2级以上路由
-![LevelBasicLayout.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6cd7bd233b7340a78460d4c1365f98dd~tplv-k3u1fbpfcp-watermark.image?)
+![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/39d23619aa004b1ea0a4da7884517398~tplv-k3u1fbpfcp-watermark.image?)
+![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/82e3f3a57ba04cdaabe2b4e616f7459a~tplv-k3u1fbpfcp-watermark.image?)
 - SimplifyBasicLayout.tsx 简化版多级展示布局，适用于2级以上路由
-
-![SimplifyBasicLayout.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/17f47836b8674c08b919b4f9e7fd6693~tplv-k3u1fbpfcp-watermark.image?)
+![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/84f3a4f14e874488a138ca985d811f8d~tplv-k3u1fbpfcp-watermark.image?)
 
 ## 相关参考链接
 - [Pinia官网](https://pinia.vuejs.org/)
