@@ -31,7 +31,6 @@ app.config.globalProperties.$bus = $bus
 app.config.globalProperties.$utils = Utils
 
 const render = (props: any = {}) => {
-  console.log(props)
   const { container } = props
   if (props) {
     // 注入 actions 实例

@@ -1,4 +1,5 @@
 import type { App } from 'vue'
+import { default as BuilderForm } from './Form/index.vue'
 import Footer from './Footer/index.vue'
 import { GlobalHeader } from './GlobalHeader'
 import UploadFile from './UploadFile/index.vue'
@@ -15,6 +16,7 @@ const components: { [key: string]: any } = {
   MDialog,
   GlobalHeader,
   UploadFile,
+  BuilderForm,
   CollapseItem,
   CollapsePanel,
   LanguageSelect,

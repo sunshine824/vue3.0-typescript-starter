@@ -579,3 +579,11 @@ export const arrayConvertObject = <T>(lists: T & { value: string | number; label
     return data
   }, {} as { [key: string]: string })
 }
+
+// 类型检测
+export const getType = (value: any) => {
+  return (Object as any).prototype.toString
+    .call(value)
+    .match(/\s+(\w+)/)[1]
+    .toLowerCase()
+}

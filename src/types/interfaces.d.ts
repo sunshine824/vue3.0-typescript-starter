@@ -1,8 +1,3 @@
-/*
- * @Author: chenxin
- * @Date: 2023-06-16 18:21:07
- * @Description: 请填写简介
- */
 declare namespace StoreState {
   // 接口返回结构
   export interface ResType<T> {

@@ -4,14 +4,14 @@ import { RouteLayout } from '@/layouts'
 const Routes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: '/home',
+    redirect: '/dynamicForm',
     component: RouteLayout,
     children: [
       {
-        path: '/home',
-        name: 'home',
-        component: () => import('@/views/home'),
-        meta: { title: '首页', hidden: true }
+        path: '/dynamicForm',
+        name: 'dynamicForm',
+        component: () => import('@/views/dynamicForm'),
+        meta: { title: '动态表单', hidden: true }
       }
     ]
   }
