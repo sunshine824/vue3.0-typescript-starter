@@ -1,4 +1,4 @@
-import { ElForm, FormItemProps, SelectOptionProxy } from 'element-plus'
+import { ElForm, FormItemProps } from 'element-plus'
 
 type TreeItem = {
   value: string
@@ -10,7 +10,6 @@ export type FormListItem = {
   colSpan?: number // 栅格占据的列数
   placeholder?: string
   props?: {
-    className?: string
     defaultValue?: unknown // 绑定的默认值
     clearable?: boolean
     disabled?: boolean | ((data: { [key: string]: any }) => boolean)
@@ -41,6 +40,6 @@ export type FormListItem = {
 }
 
 export type FConfig = {
-  form: Partial<InstanceType<typeof ElForm>> // Form Attributes
+  form: Partial<InstanceType<typeof ElForm>> // Form Attributes 与Element属性一致
   configs: FormListItem[]
 }

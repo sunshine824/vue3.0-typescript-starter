@@ -49,7 +49,7 @@
 
 <script setup lang="ts">
 import cloneDeep from 'lodash/cloneDeep'
-import { ref, onMounted, watch, computed, PropType } from 'vue'
+import { ref, onMounted, watch, computed } from 'vue'
 import { getType } from '@/utils/util'
 import type { ElForm, FormInstance } from 'element-plus'
 import { FormListItem, FConfig } from './form'
