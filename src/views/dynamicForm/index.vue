@@ -35,14 +35,14 @@ const httpRequest = (data: any) => {
     }
   })
 }
-
+// 提交表单
 const submitForm = async () => {
   const [err, res] = await to(builderFormRef.value?.validate())
   if (res) {
     console.log(res, model['value'])
   }
 }
-
+// 重置表单
 const resetFields = () => {
   builderFormRef.value?.resetFields()
 }
