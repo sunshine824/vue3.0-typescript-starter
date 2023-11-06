@@ -8,8 +8,8 @@ type TreeItem = {
 
 export type FormListItem = {
   colSpan?: number // 栅格占据的列数
-  placeholder?: string
   props?: {
+    placeholder?: string
     defaultValue?: unknown // 绑定的默认值
     clearable?: boolean
     disabled?: boolean | ((data: { [key: string]: any }) => boolean)

@@ -13,10 +13,10 @@ export const useForm = (model: Ref<{ [key: string]: any }> = ref({}), events?: a
       {
         colSpan: 12,
         typeName: 'input',
-        placeholder: 'Please enter content',
         props: {
           defaultValue: '',
-          clearable: true
+          clearable: true,
+          placeholder: 'Please enter content'
         },
         slots: [
           {
@@ -44,8 +44,8 @@ export const useForm = (model: Ref<{ [key: string]: any }> = ref({}), events?: a
       {
         colSpan: 12,
         typeName: 'select',
-        placeholder: 'Please select content',
         props: {
+          placeholder: 'Please select content',
           defaultValue: undefined,
           group: {
             clearable: true,
@@ -84,11 +84,11 @@ export const useForm = (model: Ref<{ [key: string]: any }> = ref({}), events?: a
           {
             colSpan: 12,
             typeName: 'date-picker',
-            placeholder: 'Pick a day',
             props: {
               type: 'datetime',
               clearable: true,
-              valueFormat: 'YYYY-MM-DD HH:mm:ss'
+              valueFormat: 'YYYY-MM-DD HH:mm:ss',
+              placeholder: 'Pick a day'
             },
             styles: { width: '100%' },
             formItem: {
@@ -107,12 +107,13 @@ export const useForm = (model: Ref<{ [key: string]: any }> = ref({}), events?: a
           {
             colSpan: 12,
             typeName: 'time-picker',
-            placeholder: 'Pick a time',
+
             props: {
               disabled: (data = {}) => {
                 return !model.value.date1
               },
-              clearable: true
+              clearable: true,
+              placeholder: 'Pick a time'
             },
             styles: { width: '100%' },
             formItem: {
@@ -239,7 +240,6 @@ export const useForm = (model: Ref<{ [key: string]: any }> = ref({}), events?: a
       {
         colSpan: 24,
         typeName: 'input',
-        placeholder: 'Please enter content',
         formItem: {
           prop: 'desc',
           label: 'Activity form'
@@ -247,7 +247,8 @@ export const useForm = (model: Ref<{ [key: string]: any }> = ref({}), events?: a
         props: {
           rows: 5,
           type: 'textarea',
-          clearable: true
+          clearable: true,
+          placeholder: 'Please enter content'
         },
         isShow: (data = {}) => {
           return model.value.region == 'shanghai'
@@ -323,7 +324,6 @@ export const useForm = (model: Ref<{ [key: string]: any }> = ref({}), events?: a
       {
         colSpan: 24,
         typeName: 'tree-select',
-        placeholder: 'Please select content',
         formItem: {
           prop: 'tree',
           label: 'Activity tree'
@@ -331,7 +331,8 @@ export const useForm = (model: Ref<{ [key: string]: any }> = ref({}), events?: a
         styles: { width: '100%' },
         props: {
           multiple: true,
-          showCheckbox: true
+          showCheckbox: true,
+          placeholder: 'Please select content'
         },
         treeData: [
           {

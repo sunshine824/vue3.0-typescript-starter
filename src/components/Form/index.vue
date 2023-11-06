@@ -22,7 +22,6 @@
             <component :is="components[`m-${item.typeName}`]"
                        v-bind="item"
                        v-model="model[item.formItem.prop as string]"
-                       :placeholder="item.placeholder"
                        :form-data="model"
                        :disabled="ifDisabled(item, model)"></component>
           </template>
@@ -36,8 +35,7 @@
                            v-bind="child"
                            v-model="model[child.formItem.prop as string]"
                            :form-data="model"
-                           :disabled="ifDisabled(child, model)"
-                           :placeholder="child.placeholder"></component>
+                           :disabled="ifDisabled(child, model)"></component>
               </el-form-item>
             </el-col>
           </template>
