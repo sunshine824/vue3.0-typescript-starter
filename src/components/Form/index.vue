@@ -89,23 +89,6 @@ const components: { [key: string]: any } = {
   'm-slider': mSlider
 }
 
-// 初始化表单方法
-const initForm = () => {
-  if (props.configs?.length) {
-    let m: { [key: string]: any } = {}
-    props.configs.map((item) => {
-      if (!item.children?.length) {
-        m[item.formItem.prop as string] = item.props?.defaultValue
-      } else {
-        item.children.map((child) => {
-          m[child.formItem.prop as string] = child.props?.defaultValue
-        })
-      }
-    })
-    model.value = cloneDeep({ ...m, ...props.data })
-  }
-}
-
 const ifDisabled = computed(() => {
   return (column: FormListItem, model: { [key: string]: any }) => {
     let disabled = column.props?.disabled
@@ -156,10 +139,6 @@ const getFormData = () => {
   return model.value
 }
 
-onMounted(() => {
-  // initForm()
-})
-
 watch(
   () => model.value,
   (val) => {
@@ -170,7 +149,6 @@ watch(
 watch(
   () => props.data,
   (val) => {
-    console.log(5353, val)
     model.value = val
   },
   {
