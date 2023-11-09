@@ -1,7 +1,8 @@
 <template>
   <el-select v-bind="attrs.props?.group"
              ref="elSelectRef"
-             :style="attrs.styles">
+             :style="attrs.styles"
+             :placeholder="attrs.props?.placeholder">
     <el-option v-for="item in attrs.options"
                v-bind="attrs.props?.child"
                :key="item[attrs.replaceField?.value || 'value']"
@@ -19,6 +20,7 @@ const attrs = useAttrs() as FormListItem
 const elSelectRef = ref(null)
 
 defineExpose({ elSelectRef })
+
 </script>
 
 <style scoped></style>

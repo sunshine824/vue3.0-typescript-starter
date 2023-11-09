@@ -102,7 +102,7 @@ const initForm = () => {
         })
       }
     })
-    model.value = cloneDeep({ ...props.data, ...m })
+    model.value = cloneDeep({ ...m, ...props.data })
   }
 }
 
@@ -157,7 +157,7 @@ const getFormData = () => {
 }
 
 onMounted(() => {
-  initForm()
+  // initForm()
 })
 
 watch(
@@ -170,16 +170,12 @@ watch(
 watch(
   () => props.data,
   (val) => {
+    console.log(5353, val)
     model.value = val
-  }
-)
-
-watch(
-  () => props.configs,
-  () => {
-    initForm()
   },
-  { deep: true }
+  {
+    immediate: true
+  }
 )
 
 defineExpose({

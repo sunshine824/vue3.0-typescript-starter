@@ -18,15 +18,33 @@
 
 <script setup lang="ts">
 import to from 'await-to-js'
-import { ref } from 'vue'
-import { useForm } from './form'
+import { ref, onMounted } from 'vue'
+import { useFormIterate } from './form'
 
-const model = ref<{ [key: string]: any }>({})
 const builderFormRef = ref<{ [key: string]: any } | null>(null)
 
-const changeSelect = (val: string) => {
-  console.log(val)
+onMounted(() => {
+  updateModel()
+})
+
+const updateModel = () => {
+  // 模拟通过接口返回数据回显
+  setTimeout(() => {
+    model.value.name = 'xxxx'
+  }, 1500)
 }
+
+const changeSelect = (val: string) => {
+  // 模拟通过接口返回的数据更新select options
+  setTimeout(() => {
+    changeSelectOptions('region1', [
+      { key: 'shanghai', title: 'Zone one1' },
+      { key: 'beijing', title: 'Zone two2' }
+    ])
+  }, 200)
+}
+
+// 自定义上传文件，覆盖默认Xhr行为
 const httpRequest = (data: any) => {
   library['value']['configs'].some((item) => {
     if (item.formItem.prop == 'fileName') {
@@ -47,7 +65,7 @@ const resetFields = () => {
   builderFormRef.value?.resetFields()
 }
 
-const { config: library } = useForm(model, { changeSelect, httpRequest })
+const { config: library, model, changeSelectOptions } = useFormIterate({ changeSelect, httpRequest })
 </script>
 
 <style scoped lang="less">

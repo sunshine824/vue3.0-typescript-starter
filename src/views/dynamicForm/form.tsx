@@ -1,10 +1,11 @@
 import { Ref, ref } from 'vue'
 import { ElIcon, ElButton } from 'element-plus'
 import { Search } from '@element-plus/icons-vue'
-import type { FConfig } from '@/components/Form/form'
 
-export const useForm = (model: Ref<{ [key: string]: any }> = ref({}), events?: any) => {
-  const config = ref<FConfig>({
+import { useForm } from '@/hooks/useForm'
+
+export const useFormIterate = (events?: any) => {
+  const { model, ...arg } = useForm({
     form: {
       labelWidth: '140px'
     },
@@ -64,6 +65,39 @@ export const useForm = (model: Ref<{ [key: string]: any }> = ref({}), events?: a
         formItem: {
           prop: 'region',
           label: 'Activity zone',
+          rules: [
+            {
+              required: true,
+              message: 'Please select Activity zone',
+              trigger: 'change'
+            }
+          ]
+        }
+      },
+      // 选择器
+      {
+        colSpan: 24,
+        typeName: 'select',
+        props: {
+          disabled: () => {
+            return !model.value.region
+          },
+          placeholder: 'Please select content',
+          defaultValue: undefined,
+          group: {
+            clearable: true,
+            onChange: events.changeSelect
+          },
+          child: {}
+        },
+        replaceField: { value: 'key', label: 'title' },
+        options: [],
+        styles: {
+          width: '100%'
+        },
+        formItem: {
+          prop: 'region1',
+          label: 'Activity select zone',
           rules: [
             {
               required: true,
@@ -381,5 +415,6 @@ export const useForm = (model: Ref<{ [key: string]: any }> = ref({}), events?: a
       }
     ]
   })
-  return { config, model }
+
+  return { model, ...arg}
 }
