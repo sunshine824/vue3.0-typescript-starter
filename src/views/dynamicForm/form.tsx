@@ -141,7 +141,6 @@ export const useFormIterate = (events?: any) => {
           {
             colSpan: 12,
             typeName: 'time-picker',
-
             props: {
               disabled: (data = {}) => {
                 return !model.value.date1
